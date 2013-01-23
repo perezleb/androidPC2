@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView 
+        android:id="@+id/progress_label"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:background="#75A3FF"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="My Fundraising Progress"/>
+    
+    <TableLayout 
+        android:id="@+id/progress_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_label"
+		android:layout_centerHorizontal="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+        
+        <TableRow>
+	            <TextView
+        			android:id="@+id/amount_raised"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingRight="15dp"
+			        android:textSize="20sp"
+			        android:textStyle="bold"
+			        android:text="$5,000" />            
+			    <TextView
+        			android:id="@+id/fundraising_goal"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingLeft="15dp"
+        			android:paddingRight="15dp"
+			        android:textSize="20sp"
+			        android:textStyle="bold"
+			        android:text="$10,000" />            
+			    <TextView
+        			android:id="@+id/days_left"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingLeft="15dp"
+			        android:textSize="20sp"
+			        android:textStyle="bold"
+			        android:text="50" />            
+			    
+        </TableRow>
+        <TableRow>
+	            <TextView
+        			android:id="@+id/amount_raised_label"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingRight="15dp"
+			        android:textSize="20sp"
+			        android:text="$5,000" />            
+			    <TextView
+        			android:id="@+id/fundraising_goal_label"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingLeft="15dp"
+        			android:paddingRight="15dp"
+			        android:textSize="20sp"
+			        android:text="$10,000" />            
+			    <TextView
+        			android:id="@+id/days_left_label"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:paddingLeft="15dp"
+			        android:textSize="20sp"
+			        android:text="50" />            
+			    
+        </TableRow>
+    </TableLayout>
+    <ListView
+	 	android:layout_width="fill_parent"
+	 	android:layout_height="wrap_content"
+	 	android:layout_below="@id/progress_table"
+	 	android:layout_alignParentBottom="true"	 
+	 	android:id="@+id/donor_list"
+	 	android:background="#FFFFFF"
+	 	android:listSelector="@drawable/donor_list_selector"/>  
+</RelativeLayout>

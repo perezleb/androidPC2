@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="3dp">
+	<TextView 
+	    android:id="@+id/teamraiser_name"  
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:paddingLeft="3dp"
+		android:paddingBottom="2dp"
+		android:textSize="16sp" 
+		android:textStyle="bold"
+		android:text="Event Name"/>
+	<TextView 
+	    android:id="@+id/event_address" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/teamraiser_name"
+	    android:paddingLeft="3dp"
+	    android:textSize="14sp"
+	    android:text="1201 Strickland Dr"/>
+</RelativeLayout>
