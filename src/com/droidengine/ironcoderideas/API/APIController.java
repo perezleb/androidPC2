@@ -4,26 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-
+import org.w3c.dom.Document;
+import android.os.AsyncTask;
 import android.util.Log;
 
-public class APIController {
+public class APIController extends AsyncTask<Void, Void,  Document> {
+	
 	private static String TAG = "IRONCODER";
 	
 	private static String URL = "http://qa217.bvt2.corp.convio.com/site/";
@@ -34,10 +33,11 @@ public class APIController {
 	private String method;
 	private HashMap<String, String> arguments;
 	
-	private HttpClient client;
+	private HttpClient client = new DefaultHttpClient();
 	
 	private InputStream xmlResponse;
 	
+		
 	
 	public APIController(String api, String method, HashMap<String, String> params){		
 		this.api = api;
@@ -45,61 +45,29 @@ public class APIController {
 		this.arguments = params;
 	}
 	
-	public InputStream get(){
-		ExecutorService exs = Executors.newSingleThreadExecutor();
+	public InputStream doGet() {
+		String request = generateRequest();
+		HttpGet get = new HttpGet(request);
 		try {
-			return exs.submit(new Callable<InputStream>() {
-				public InputStream call() throws UnsupportedEncodingException {
-					String request = generateRequest();
-					client = new DefaultHttpClient();
-					HttpGet get = new HttpGet(request);		
-					try {					
-						HttpResponse response = client.execute(get);
-						xmlResponse = response.getEntity().getContent();						
-						//readResponse();
-					} catch(Exception e){
-						Log.d(TAG, e.toString());
-					}
-					return xmlResponse;
-				}
-			}).get();
-		}
-		catch(ExecutionException e) {
+			HttpResponse response = client.execute(get);
+			xmlResponse = response.getEntity().getContent();
+		} catch (Exception e) {
 			Log.d(TAG, e.toString());
 		}
-		catch(InterruptedException e) {
-			Log.d(TAG, e.toString());
-		}
-		
-		return null;
+		return xmlResponse;
+
 	}
-	
-	public InputStream post() {
-		ExecutorService exs = Executors.newSingleThreadExecutor();
+
+	public InputStream doPost() {
+		String APIurl = generateRequest();
+		HttpPost post = new HttpPost(APIurl);
 		try {
-			return exs.submit(new Callable<InputStream>() {
-				public InputStream call() throws UnsupportedEncodingException {
-					String request = generateRequest();
-					client = new DefaultHttpClient();										
-					HttpPost post = new HttpPost(request);										
-					try {					
-						HttpResponse response = client.execute(post);
-						xmlResponse = response.getEntity().getContent();												
-					} catch(Exception e){
-						Log.d(TAG, e.toString());
-					}
-					return xmlResponse;
-				}
-			}).get();
-		}
-		catch(ExecutionException e) {
+			HttpResponse response = client.execute(post);
+			xmlResponse = response.getEntity().getContent();
+		} catch (Exception e) {
 			Log.d(TAG, e.toString());
 		}
-		catch(InterruptedException e) {
-			Log.d(TAG, e.toString());
-		}
-		
-		return null;
+		return xmlResponse;
 	}
 	
 	public void shutDown(){
@@ -135,5 +103,55 @@ public class APIController {
 			Log.d(TAG,  e.toString());
 		}
 	}
+
+	@Override
+	protected Document doInBackground(Void... arg0) {
+		InputStream response = doPost();
+		Document doc = null;
+		if (response == null) {
+			Log.d(TAG, "Error generating response");
+		} else {
+
+			// Parse response into document
+			DocumentBuilder db = getDocumentBuilder();
+			if (db != null)
+				try {
+					doc = db.parse(response);
+				} catch (Exception e) {
+					Log.d(TAG, "Unable to parse response: " + e.toString());
+				}
+			else
+				Log.d(TAG, "Error creating document builder");
+		}
+		return doc;
+	}
+	
+	   @Override
+       protected void onPostExecute(Document result) {
+		   Log.d(TAG, result.toString());
+           super.onPostExecute(result);
+           return;
+       }
+	   
+	public DocumentBuilder getDocumentBuilder(){
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    dbf.setValidating(false);
+	    dbf.setIgnoringComments(false);
+	    dbf.setIgnoringElementContentWhitespace(true);
+	    dbf.setNamespaceAware(true);
+	    
+	    DocumentBuilder db = null;
+	    
+	    try {
+			db = dbf.newDocumentBuilder();			
+		} catch (ParserConfigurationException e) {
+			Log.d(TAG, e.toString());
+		}
+	    	    
+	    return db;
+	}
+	
+
+	
 	
 }

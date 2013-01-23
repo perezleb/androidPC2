@@ -1,14 +1,10 @@
 package com.droidengine.ironcoderideas.API;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import com.droidengine.ironcoderideas.ListItems.TeamraiserItem;
 
 import android.util.Log;
@@ -33,15 +29,9 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		
 		//Make API request to login user
 		APIController apiUser = new APIController(API, METHOD, params);
-		response = apiUser.post();
-		
-		//Parse response into document
-		final DocumentBuilder db = getDocumentBuilder();
-		if (db != null)			
-			doc = db.parse(response);
-		else
-			throw new Exception("Error creating document builder");		
-		
+		apiUser.execute();
+		doc = apiUser.get();
+
 	    //check for errorResponse
 		if (isErrorMessage()){
 			Log.d(TAG, "Error Message in Response");

@@ -1,9 +1,10 @@
 package com.droidengine.ironcoderideas.API;
 
 import java.util.HashMap;
-import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import android.util.Log;
+
+import android.os.AsyncTask;
 
 public class PCLoginAPI extends APIResponseManager {
 	private static String TAG = "IRONCODER";
@@ -25,19 +26,9 @@ public class PCLoginAPI extends APIResponseManager {
 		
 		//Make API request to login user
 		APIController apiUser = new APIController(API, METHOD, params);
-		response = apiUser.post();		
+		AsyncTask<Void, Void, Document>  task = apiUser.execute();
 		
-		if (response == null){
-			throw new Exception("API Response Error");
-		}
-		
-		//Parse response into document
-		DocumentBuilder db = getDocumentBuilder();
-		if (db != null)
-			doc = db.parse(response);
-		else
-			throw new Exception("Error creating document builder");		
-		
+		doc = task.get();
 	    //check for errorResponse
 		if (isErrorMessage()){
 			if (errorMessage != null)
