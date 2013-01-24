@@ -39,8 +39,6 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		}
 		
 		consTeamraisers = getRegisteredTeamraiserList();
-								
-		apiUser.shutDown();		
 		return consTeamraisers;
 		
 	}

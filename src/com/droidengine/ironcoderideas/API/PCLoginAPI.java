@@ -45,8 +45,6 @@ public class PCLoginAPI extends APIResponseManager {
 	    if (token == null || consID == null){
 	    	throw new Exception("Technical Difficulties: Could not log you in.");
 	    }
-	    
-	    apiUser.shutDown();
 	}
 	
 }

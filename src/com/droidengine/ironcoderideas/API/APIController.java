@@ -123,15 +123,14 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 			else
 				Log.d(TAG, "Error creating document builder");
 		}
+		shutDown();
 		return doc;
 	}
 	
-	   @Override
-       protected void onPostExecute(Document result) {
-		   Log.d(TAG, result.toString());
-           super.onPostExecute(result);
-           return;
-       }
+	@Override
+	protected void onPostExecute(Document result) {
+		super.onPostExecute(result);
+	}
 	   
 	public DocumentBuilder getDocumentBuilder(){
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
