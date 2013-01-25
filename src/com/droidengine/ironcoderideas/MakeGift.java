@@ -37,23 +37,22 @@ public class MakeGift extends Activity {
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()){
-		case R.id.progress:
+		if (item.getItemId() == R.id.progress) {
 			// do nothing
 			startProgressActivity();
 			return true;
-		case R.id.email:
+		} else if (item.getItemId() == R.id.email) {
 			//go to email page
 			startEmailActivity();
 			return true;
-		case R.id.make_gift:
+		} else if (item.getItemId() == R.id.make_gift) {
 			//go to make gift page
 			return true;
-		case R.id.logout:
+		} else if (item.getItemId() == R.id.logout) {
 			// logout
 			return true;
-		default:
-            return super.onOptionsItemSelected(item);
+		} else {
+			return super.onOptionsItemSelected(item);
 		}
 	}
 	

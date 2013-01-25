@@ -39,10 +39,8 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
-		case R.id.login_button:
+		if (v.getId() == R.id.login_button) {
 			login();
-			break;
 		}
 		
 	}    
