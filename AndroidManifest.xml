@@ -7,7 +7,22 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="17" />
+
+    <permission
+        android:name="com.droidengine.ironcoderideas.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.droidengine.ironcoderideas.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+        
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -25,20 +40,29 @@
         </activity>
         <activity
             android:name=".RegisteredTeamraisers"
-            android:label="Teamraisers">
+            android:label="Teamraisers" >
         </activity>
         <activity
             android:name=".Progress"
-            android:label="My Progress">
+            android:label="My Progress" >
         </activity>
         <activity
             android:name=".Email"
-            android:label="Email">
+            android:label="Email" >
         </activity>
         <activity
             android:name=".MakeGift"
-            android:label="Make a Gift">
+            android:label="Make a Gift" >
         </activity>
+        <activity
+            android:name=".NearbyTeamraisersActivity"
+            android:label="Nearby Teamraisers" >
+        </activity>        
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBvijAcDptneQJyfd6rOCeSrrilwoyCq5U" />
+                
     </application>
 
 </manifest>
