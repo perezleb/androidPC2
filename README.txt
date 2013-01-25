@@ -19,4 +19,7 @@ ADD GIFT
 addGift: (POST) Requires auth_token
 https://secure2.convio.net/organization/site/CRTeamraiserAPI?method=addGift
 
+To install maps Library: 
+https://developers.google.com/maps/documentation/android/start#installing_the_google_maps_android_v2_api
+Email leber.perez@blackbaud.com with your SHA key in order to use the same api key. 
 
