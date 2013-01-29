@@ -32,7 +32,7 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	
 	private static String TAG = "IRONCODER";
 	
-	private static String URL = "http://jlin-linux.blackbaud.global/site/";
+	private static String URL = "http://qa217.bvt2.corp.convio.com/site/";
 	private static String KEY = "api_key";
 	private static String VERSION = "1.0";
 	
