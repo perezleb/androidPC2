@@ -2,6 +2,7 @@ package com.droidengine.ironcoderideas;
 
 import java.util.ArrayList; 
 
+import com.droidengine.ironcoderideas.API.RecentActivityAPI;
 import com.droidengine.ironcoderideas.ListAdapters.RecentActivityListBaseAdapter;
 import com.droidengine.ironcoderideas.ListItems.ActivityItem;
 import com.droidengine.ironcoderideas.ListItems.ActivityListHeader;
@@ -19,15 +20,19 @@ public class Progress extends Activity {
 	
 	private static final String TAG = "IRONCODER";
 	
-	private static final String TOKEN_KEY = "CONS_ID";
-	private static final String CONS_ID_KEY = "TOKEN";
+	private static final String TOKEN_KEY = "TOKEN";
+	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
+	private static final String COOKIE_KEY = "COOKIE";
 	
 	
 	private String token;
 	private String consID;
 	private String frID;
+	private String cookie;
 	
+	
+	private RecentActivityAPI activityAPI;
 	private ArrayList activityList;
 	
 	
@@ -38,8 +43,9 @@ public class Progress extends Activity {
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
         frID = getIntent().getStringExtra(FR_ID_KEY);
+        cookie = getIntent().getStringExtra(COOKIE_KEY);
         
-        if (token != null && consID != null){
+        if (token != null && consID != null & frID != null){
         	activityList = getRecentActivity();
         	
         } else {
@@ -91,28 +97,23 @@ public class Progress extends Activity {
 	}
 	
 	private ArrayList<ActivityItem> getRecentActivity(){
+		if (activityAPI == null){
+			activityAPI = new RecentActivityAPI(token, frID, cookie);
+		}		
+		
 		ArrayList list = new ArrayList();
+				
+		try{
+			list = activityAPI.getRecentActivity();
+			
+		} catch(Exception e){
+			Log.d(TAG, e.toString());
+		}
 		
 		ActivityListHeader header = new ActivityListHeader();
 		header.setHeader("Recent Donors");
-		list.add(header);
+		list.add(0, header);
 		
-		ActivityItem item = new ActivityItem();
-		item.setDonor("Kyle", "Martinez", "$32.00");
-		list.add(item);
-		
-		item = new ActivityItem();
-		item.setDonor("Kyle", "Martinez", "$32.00");
-		list.add(item);
-		item = new ActivityItem();
-		item.setDonor("Kyle", "Martinez", "$32.00");
-		list.add(item);
-		item = new ActivityItem();
-		item.setDonor("Kyle", "Martinez", "$32.00");
-		list.add(item);
-		item = new ActivityItem();
-		item.setDonor("Kyle", "Martinez", "$32.00");
-		list.add(item);
 
 		return list;
 	}

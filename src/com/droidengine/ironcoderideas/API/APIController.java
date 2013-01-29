@@ -13,10 +13,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -31,18 +38,30 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	
 	private String api;
 	private String method;
-	private HashMap<String, String> arguments;
+	private HashMap<String, String> arguments;	
 	
-	private HttpClient client = new DefaultHttpClient();
-	
+	private CookieStore cookieStore;
+	private HttpContext httpContext;
+	private HttpClient client;
+	private String savedCookie;
 	private InputStream xmlResponse;
-	
 		
 	
 	public APIController(String api, String method, HashMap<String, String> params){		
 		this.api = api;
 		this.method = method;
 		this.arguments = params;
+		client = new DefaultHttpClient();
+		cookieStore = new BasicCookieStore();
+		httpContext = new BasicHttpContext();		
+	}
+	
+	public void setCookie(String value){
+		savedCookie = value;
+	}
+	
+	public String getCookie(){
+		return savedCookie;
 	}
 	
 	public InputStream doGet() {
@@ -54,16 +73,28 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
 		}
+		
 		return xmlResponse;
-
 	}
 
 	public InputStream doPost() {
 		String APIurl = generateRequest();
 		HttpPost post = new HttpPost(APIurl);
 		try {
-			HttpResponse response = client.execute(post);
-			xmlResponse = response.getEntity().getContent();
+			
+			if (savedCookie != null){
+				Cookie cookie = new BasicClientCookie("Set-Cookie", savedCookie);
+				cookieStore.addCookie(cookie);
+			}
+			
+			httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+			HttpResponse response = client.execute(post, httpContext);
+			
+			if(savedCookie == null){
+				savedCookie = response.getFirstHeader("Set-Cookie").getValue();
+			}
+			
+			xmlResponse = response.getEntity().getContent();			
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
 		}

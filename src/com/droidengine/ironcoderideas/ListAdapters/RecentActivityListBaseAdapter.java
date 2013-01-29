@@ -54,7 +54,7 @@ public class RecentActivityListBaseAdapter extends BaseAdapter{
 				
 				ActivityListHeader headerItem = (ActivityListHeader) item;
 				
-				v = l_Inflater.inflate(R.layout.donor_list_header, null);
+				v = l_Inflater.inflate(R.layout.activity_list_header, null);
 				
 				TextView header = (TextView)v.findViewById(R.id.donor_list_header);
 				
@@ -63,28 +63,22 @@ public class RecentActivityListBaseAdapter extends BaseAdapter{
 				}
 			}
 			else{
-				ActivityItem donor = (ActivityItem)item;
+				ActivityItem activityItem = (ActivityItem)item;
 				
-				v = l_Inflater.inflate(R.layout.donor_list_items, null);
+				v = l_Inflater.inflate(R.layout.activity_list_items, null);
 				
-				TextView firstName = (TextView)v.findViewById(R.id.donor_first_name);
-				TextView lastName = (TextView)v.findViewById(R.id.donor_last_name);
-				TextView amountDonated = (TextView)v.findViewById(R.id.amount_donated);
+				TextView activity = (TextView)v.findViewById(R.id.activity);
+				TextView activityDate = (TextView)v.findViewById(R.id.activity_date);
 				
-				if (firstName != null){
-					firstName.setText(donor.getFirstName());
+				if (activity != null){
+					activity.setText(activityItem.getActivity());
 				}
 				
-				if (lastName != null){
-					lastName.setText(donor.getLastName());
-				}
-				
-				if (amountDonated != null){
-					amountDonated.setText(donor.getAmountDonated());
+				if (activityDate != null){
+					activityDate.setText(activityItem.getDate());
 				}
 			}
 		}
-		
 		
 		return v;
 	}

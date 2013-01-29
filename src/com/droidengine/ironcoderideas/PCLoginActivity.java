@@ -18,6 +18,9 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 	private static final String TAG = "IRONCODER";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String TOKEN_KEY = "TOKEN";
+	private static final String COOKIE_KEY = "COOKIE";
+	
+	private String cookie;
 	
 	private PCLoginAPI pcLogin;
 	
@@ -65,17 +68,18 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		
 		try {
 			pcLogin.login();
+			cookie = pcLogin.getCookie();
 		} catch (Exception e) {	
 			displayErrorDialog(e.toString());
 		}
 //		} finally {
 //			loadingDialog.dismiss();
 //		}
-		
-		
+				
 		Intent intent = new Intent(this, RegisteredTeamraisers.class);
     	intent.putExtra(CONS_ID_KEY, pcLogin.consID);
     	intent.putExtra(TOKEN_KEY, pcLogin.token);
+    	intent.putExtra(COOKIE_KEY, cookie);
     	startActivity(intent);
 	}
     

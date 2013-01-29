@@ -18,13 +18,10 @@ public class APIResponseManager {
 	public InputStream response;
 	public String errorMessage;
 	
-	
-
-	
 	public boolean isErrorMessage(){
 		if (doc.getElementsByTagName("errorResponse").getLength() > 0){	    	
 	    	Element errorResponse = (Element) doc.getElementsByTagName("errorResponse").item(0);
-	    	NodeList errorTag = errorResponse.getElementsByTagName("errorMessage");
+	    	NodeList errorTag = errorResponse.getElementsByTagName("message");
 	    	if (errorTag.getLength() == 1){
 	    		NodeList errorNode = errorTag.item(0).getChildNodes();
 	    		if (errorNode.getLength() == 1){
@@ -34,5 +31,18 @@ public class APIResponseManager {
 	    	return true;
 	    }
 		return false;		
+	}
+	
+	public String getElementValue(NodeList list){
+		if (list.getLength() == 0){
+			return null;
+		} else {
+			NodeList childNodeList = list.item(0).getChildNodes();
+			if (childNodeList.getLength() == 0){
+				return null;
+			} else {
+				return childNodeList.item(0).getNodeValue();
+			}
+		}
 	}
 }

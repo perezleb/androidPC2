@@ -15,12 +15,11 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 	private static String API = "CRTeamraiserAPI?";
 	
 	public String consID;
+	public String cookie;
 	
-	private ArrayList<TeamraiserItem> consTeamraisers;
-	
-	
-	public RegisteredTeamraisersAPI(String cons){
+	public RegisteredTeamraisersAPI(String cons, String savedCookie){
 		consID = cons;
+		cookie = savedCookie;
 	}
 	
 	public ArrayList<TeamraiserItem> getRegisteredTeamraisers() throws Exception {
@@ -29,6 +28,7 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		
 		//Make API request to login user
 		APIController apiUser = new APIController(API, METHOD, params);
+		apiUser.setCookie(cookie);
 		apiUser.execute();
 		doc = apiUser.get();
 
@@ -38,9 +38,7 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 			throw new Exception(errorMessage);
 		}
 		
-		consTeamraisers = getRegisteredTeamraiserList();
-		return consTeamraisers;
-		
+		return getRegisteredTeamraiserList();		
 	}
 	
 	private ArrayList<TeamraiserItem> getRegisteredTeamraiserList(){
@@ -69,17 +67,5 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		
 		return list;
 	}
-	
-	private String getElementValue(NodeList list){
-		if (list.getLength() == 0){
-			return null;
-		} else {
-			NodeList childNodeList = list.item(0).getChildNodes();
-			if (childNodeList.getLength() == 0){
-				return null;
-			} else {
-				return childNodeList.item(0).getNodeValue();
-			}
-		}
-	}
+		
 }

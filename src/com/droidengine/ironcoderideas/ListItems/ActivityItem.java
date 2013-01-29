@@ -3,26 +3,23 @@ package com.droidengine.ironcoderideas.ListItems;
 
 public class ActivityItem implements Item {
 	
-	private String firstName;
-	private String lastName;
-	private String amountDonated;
+	private String activity;
+	private String date;
 
-	public void setDonor(String first, String last, String amount){
-		firstName = first;
-		lastName = last;
-		amountDonated = amount;
+	public void setActivity(String activity){
+		this.activity = activity;
 	}
 	
-	public String getFirstName(){
-		return firstName;
+	public void setDate(String date){
+		this.date = date;
 	}
 	
-	public String getLastName(){
-		return lastName;
+	public String getActivity(){
+		return this.activity;
 	}
 	
-	public String getAmountDonated(){
-		return amountDonated;
+	public String getDate(){
+		return this.date;
 	}
 	
 	@Override
