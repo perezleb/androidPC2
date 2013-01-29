@@ -32,7 +32,7 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	
 	private static String TAG = "IRONCODER";
 	
-	private static String URL = "http://qa217.bvt2.corp.convio.com/site/";
+	private static String URL = "http://jlin-linux.blackbaud.global/site/";
 	private static String KEY = "api_key";
 	private static String VERSION = "1.0";
 	
@@ -40,8 +40,6 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	private String method;
 	private HashMap<String, String> arguments;	
 	
-	private CookieStore cookieStore;
-	private HttpContext httpContext;
 	private HttpClient client;
 	private String savedCookie;
 	private InputStream xmlResponse;
@@ -52,8 +50,6 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		this.method = method;
 		this.arguments = params;
 		client = new DefaultHttpClient();
-		cookieStore = new BasicCookieStore();
-		httpContext = new BasicHttpContext();		
 	}
 	
 	public void setCookie(String value){
@@ -81,17 +77,17 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		String APIurl = generateRequest();
 		HttpPost post = new HttpPost(APIurl);
 		try {
-			
-			if (savedCookie != null){
-				Cookie cookie = new BasicClientCookie("Set-Cookie", savedCookie);
-				cookieStore.addCookie(cookie);
-			}
-			
-			httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-			HttpResponse response = client.execute(post, httpContext);
+									
+			HttpResponse response = client.execute(post);
 			
 			if(savedCookie == null){
 				savedCookie = response.getFirstHeader("Set-Cookie").getValue();
+				String[] sessionParams = savedCookie.split("=");
+				String sessionID = sessionParams[1];
+				int index = sessionID.indexOf(";");
+				sessionID = sessionID.substring(0, index);
+				savedCookie = sessionParams[0] + "=" + sessionID;
+				Log.d(TAG, sessionID);
 			}
 			
 			xmlResponse = response.getEntity().getContent();			
@@ -109,6 +105,11 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	
 	private String generateRequest(){
 		String request = URL + api + "method=" + method + "&api_key=" + KEY + "&v=" + VERSION;
+		
+		int jsessionIndex = request.indexOf("?");
+		if (savedCookie != null){
+			request = request.substring(0, jsessionIndex) + ";" + savedCookie + request.substring(jsessionIndex, request.length()); 
+		}
 		
 		Iterator it = arguments.entrySet().iterator();
 	    while (it.hasNext()) {
