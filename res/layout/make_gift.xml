@@ -1,17 +1,230 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <TextView 
-        android:id="@+id/make_gift_label"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:background="#75A3FF"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Make a Gift"/>  
-</RelativeLayout>
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/make_gift_label"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:background="#75A3FF"
+            android:gravity="center"
+            android:text="Make a Gift"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editText1"
+            android:layout_alignRight="@+id/editText1"
+            android:layout_below="@+id/make_gift_label"
+            android:text="@string/make_gift_instructions"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/giftFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="22dp"
+            android:ems="10"
+            android:hint="@string/make_gift_first_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/giftLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/giftFirstName"
+            android:layout_alignRight="@+id/giftFirstName"
+            android:layout_below="@+id/giftFirstName"
+            android:ems="10"
+            android:hint="@string/make_gift_last_name"
+            android:inputType="textPersonName" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/giftEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/giftFirstName"
+            android:layout_alignRight="@+id/giftFirstName"
+            android:layout_below="@+id/giftLastName"
+            android:ems="10"
+            android:hint="@string/email_label"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/giftAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/giftFirstName"
+            android:layout_alignRight="@+id/giftFirstName"
+            android:layout_below="@+id/giftEmail"
+            android:ems="10"
+            android:hint="@string/make_gift_amount_label"
+            android:inputType="numberDecimal" />
+
+        <RadioGroup
+            android:id="@+id/paymentMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/giftFirstName"
+            android:layout_alignRight="@+id/giftFirstName"
+            android:layout_below="@+id/giftAmount"
+            android:layout_marginTop="21dp" >
+
+            <RadioButton
+                android:id="@+id/cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/make_gift_cash" />
+
+            <RadioButton
+                android:id="@+id/credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/make_gift_credit" />
+        </RadioGroup>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/cardBillingInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/paymentMethod"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/billingCardNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/make_gift_card_number_label"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/billingCardCVV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/billingCardNumber"
+                android:layout_toRightOf="@+id/billingCardNumber"
+                android:ems="10"
+                android:hint="@string/make_gift_verif_number"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/billingExpirationMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/billingCardNumber"
+                android:layout_below="@+id/billingCardNumber"
+                android:ems="10"
+                android:hint="@string/make_gift_exp_month"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/billingExpirationYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billingCardNumber"
+                android:layout_toRightOf="@+id/billingExpirationMonth"
+                android:ems="10"
+                android:hint="@string/make_gift_exp_year"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/billingFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/billingExpirationMonth"
+                android:ems="10"
+                android:hint="@string/make_gift_first_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/billingLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/billingFirstName"
+                android:layout_toRightOf="@+id/billingFirstName"
+                android:ems="10"
+                android:hint="@string/make_gift_last_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/billingStreet1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/billingLastName"
+                android:ems="10"
+                android:hint="@string/make_gift_street"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/billingCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/billingStreet1"
+                android:ems="10"
+                android:hint="@string/make_gift_city"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/billingState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billingCity"
+                android:ems="10"
+                android:hint="@string/make_gift_state"
+                android:inputType="textPersonName"
+                android:width="100dp" />
+
+            <EditText
+                android:id="@+id/billing_zip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billingCity"
+                android:layout_toRightOf="@+id/billingState"
+                android:ems="10"
+                android:hint="@string/make_gift_zip"
+                android:inputType="number|textPersonName" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/submitGift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/cardBillingInfo"
+            android:layout_centerHorizontal="true"
+            android:text="Make Gift" />
+        
+    </RelativeLayout>
+
+</ScrollView>
