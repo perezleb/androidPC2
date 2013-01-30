@@ -93,6 +93,10 @@ public class Progress extends Activity {
 		} else if (item.getItemId() == R.id.logout) {
 			// logout
 			return true;
+			
+		} else if (item.getItemId() == R.id.my_teamraisers){
+			startRegisteredTeamraisersActivity();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
@@ -100,11 +104,24 @@ public class Progress extends Activity {
 	
 	private void startEmailActivity(){
 		Intent intent = new Intent(this, Email.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
+    	intent.putExtra(FR_ID_KEY, frID);
     	startActivity(intent);
 	}
 	
 	private void startGiftActivity(){
 		Intent intent = new Intent(this, MakeGift.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
+    	intent.putExtra(FR_ID_KEY, frID);
+    	startActivity(intent);
+	}
+	
+	private void startRegisteredTeamraisersActivity(){
+		Intent intent = new Intent(this, RegisteredTeamraisers.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
     	startActivity(intent);
 	}
 	

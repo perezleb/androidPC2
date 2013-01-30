@@ -25,7 +25,6 @@ public class RegisteredTeamraisers extends Activity{
 	private static final String FR_ID_KEY = "FR_ID";
 	private String token;
 	private String consID;
-	private String frID;
 	
 	private RegisteredTeamraisersAPI regEvents;
 	

@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 public class MakeGift extends Activity {
 	
-	private static final String TOKEN_KEY = "CONS_ID";
-	private static final String CONS_ID_KEY = "TOKEN";
+	private static final String TOKEN_KEY = "TOKEN";
+	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
 
 	private String token;
@@ -38,7 +38,7 @@ public class MakeGift extends Activity {
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.progress) {
-			// do nothing
+			//go to progress page
 			startProgressActivity();
 			return true;
 		} else if (item.getItemId() == R.id.email) {
@@ -46,23 +46,40 @@ public class MakeGift extends Activity {
 			startEmailActivity();
 			return true;
 		} else if (item.getItemId() == R.id.make_gift) {
-			//go to make gift page
+			//do nothing
 			return true;
 		} else if (item.getItemId() == R.id.logout) {
 			// logout
+			return true;
+			
+		} else if (item.getItemId() == R.id.my_teamraisers){
+			startRegisteredTeamraisersActivity();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
 	
-	private void startProgressActivity(){
-		Intent intent = new Intent(this, Progress.class);
+	private void startEmailActivity(){
+		Intent intent = new Intent(this, Email.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
+    	intent.putExtra(FR_ID_KEY, frID);
     	startActivity(intent);
 	}
 	
-	private void startEmailActivity(){
-		Intent intent = new Intent(this, Email.class);
+	private void startProgressActivity(){
+		Intent intent = new Intent(this, Progress.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
+    	intent.putExtra(FR_ID_KEY, frID);
+    	startActivity(intent);
+	}
+	
+	private void startRegisteredTeamraisersActivity(){
+		Intent intent = new Intent(this, RegisteredTeamraisers.class);
+		intent.putExtra(CONS_ID_KEY, consID);
+    	intent.putExtra(TOKEN_KEY, token);
     	startActivity(intent);
 	}
  
