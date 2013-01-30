@@ -80,7 +80,7 @@
     </TableLayout>
     <ListView
 	 	android:layout_width="fill_parent"
-	 	android:layout_height="wrap_content"
+	 	android:layout_height="match_parent"
 	 	android:layout_below="@id/progress_table"
 	 	android:layout_alignParentBottom="true"	 
 	 	android:id="@+id/donor_list"
