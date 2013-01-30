@@ -9,16 +9,16 @@
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
 		android:paddingLeft="3dp"
-		android:paddingBottom="2dp"
-		android:textSize="16sp" 
+		android:textSize="17sp" 
 		android:textStyle="bold"
 		android:text="Activity Name"/>
 	<TextView 
 	    android:id="@+id/activity_date" 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@id/activity"
+	    android:paddingRight="3dp"
+	    android:layout_alignParentRight="true"
 	    android:paddingLeft="3dp"
-	    android:textSize="14sp"
+	    android:textSize="17sp"
 	    android:text="Activity Date"/>
 </RelativeLayout>
