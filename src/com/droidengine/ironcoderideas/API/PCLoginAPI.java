@@ -14,8 +14,6 @@ public class PCLoginAPI extends APIResponseManager {
 	private String username;
 	private String password;
 	
-	private String cookie;
-	
 	public PCLoginAPI(String loginName, String loginPassword){
 		username = loginName;
 		password = loginPassword;
@@ -43,17 +41,9 @@ public class PCLoginAPI extends APIResponseManager {
 	    Element loginResponse = (Element) doc.getElementsByTagName("loginResponse").item(0);
 	    token = loginResponse.getElementsByTagName("token").item(0).getChildNodes().item(0).getNodeValue();
 	    consID = loginResponse.getElementsByTagName("cons_id").item(0).getChildNodes().item(0).getNodeValue();	    
-	    cookie = apiUser.getCookie();
 	    	    
 	    if (token == null || consID == null){
 	    	throw new Exception("Technical Difficulties: Could not log you in.");
 	    }
-	}
-	
-	public String getCookie(){
-		return cookie;
-	}
-	
-	
-	
+	}	
 }

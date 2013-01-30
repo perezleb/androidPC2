@@ -15,11 +15,9 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 	private static String API = "CRTeamraiserAPI?";
 	
 	public String consID;
-	public String cookie;
 	
-	public RegisteredTeamraisersAPI(String cons, String savedCookie){
+	public RegisteredTeamraisersAPI(String cons){
 		consID = cons;
-		cookie = savedCookie;
 	}
 	
 	public ArrayList<TeamraiserItem> getRegisteredTeamraisers() throws Exception {
@@ -28,7 +26,6 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		
 		//Make API request to login user
 		APIController apiUser = new APIController(API, METHOD, params);
-		apiUser.setCookie(cookie);
 		apiUser.execute();
 		doc = apiUser.get();
 

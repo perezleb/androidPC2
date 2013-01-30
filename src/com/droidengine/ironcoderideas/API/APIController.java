@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -41,9 +42,6 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	private HashMap<String, String> arguments;	
 	
 	private HttpClient client;
-	private CookieStore cookieStore;
-	private HttpContext httpContext;
-	private String savedCookie;
 	private InputStream xmlResponse;
 		
 	
@@ -52,16 +50,6 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		this.method = method;
 		this.arguments = params;
 		client = new DefaultHttpClient();
-		cookieStore = new BasicCookieStore();
-		httpContext = new BasicHttpContext();
-	}
-	
-	public void setCookie(String value){
-		savedCookie = value;
-	}
-	
-	public String getCookie(){
-		return savedCookie;
 	}
 	
 	public InputStream doGet() {
@@ -82,26 +70,7 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		HttpPost post = new HttpPost(APIurl);
 		try {
 			
-			if(savedCookie != null){
-				Log.d(TAG, "setting session: " + savedCookie);
-				BasicClientCookie cookie = new BasicClientCookie("JSESSIONID", savedCookie);
-				cookie.setPath("/qa217/site/");
-				cookieStore.addCookie(cookie);
-				httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-			}
-									
-			HttpResponse response = client.execute(post, httpContext);
-			
-			if(savedCookie == null){
-				savedCookie = response.getFirstHeader("Set-Cookie").getValue();
-				String[] sessionParams = savedCookie.split("=");
-				String sessionID = sessionParams[1];
-				int index = sessionID.indexOf(";");
-				savedCookie = sessionID.substring(0, index);				
-				//savedCookie = sessionParams[0] + "=" + sessionID;
-				Log.d(TAG, savedCookie);
-			}
-			
+			HttpResponse response = client.execute(post);
 			xmlResponse = response.getEntity().getContent();			
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
@@ -117,11 +86,6 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	
 	private String generateRequest(){
 		String request = URL + api + "method=" + method + "&api_key=" + KEY + "&v=" + VERSION;
-		
-//		int jsessionIndex = request.indexOf("?");
-//		if (savedCookie != null){
-//			request = request.substring(0, jsessionIndex) + ";" + savedCookie + request.substring(jsessionIndex, request.length()); 
-//		}
 		
 		Iterator it = arguments.entrySet().iterator();
 	    while (it.hasNext()) {
@@ -193,8 +157,4 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 	    	    
 	    return db;
 	}
-	
-
-	
-	
 }

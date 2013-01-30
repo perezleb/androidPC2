@@ -23,14 +23,11 @@ public class Progress extends Activity {
 	private static final String TOKEN_KEY = "TOKEN";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
-	private static final String COOKIE_KEY = "COOKIE";
 	
 	
 	private String token;
 	private String consID;
 	private String frID;
-	private String cookie;
-	
 	
 	private RecentActivityAPI activityAPI;
 	private ArrayList activityList;
@@ -43,7 +40,6 @@ public class Progress extends Activity {
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
         frID = getIntent().getStringExtra(FR_ID_KEY);
-        cookie = getIntent().getStringExtra(COOKIE_KEY);
         
         if (token != null && consID != null & frID != null){
         	activityList = getRecentActivity();
@@ -98,7 +94,7 @@ public class Progress extends Activity {
 	
 	private ArrayList<ActivityItem> getRecentActivity(){
 		if (activityAPI == null){
-			activityAPI = new RecentActivityAPI(token, frID, cookie);
+			activityAPI = new RecentActivityAPI(token, frID);
 		}		
 		
 		ArrayList list = new ArrayList();

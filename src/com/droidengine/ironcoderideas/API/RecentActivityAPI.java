@@ -19,13 +19,11 @@ public class RecentActivityAPI extends APIResponseManager {
 	
 	public String token;
 	public String fr_id;
-	public String cookie;
 	
 	
-	public RecentActivityAPI(String auth, String id, String savedCookie){
+	public RecentActivityAPI(String auth, String id){
 		token = auth;
 		fr_id = id;
-		cookie = savedCookie;
 	}
 	
 	public ArrayList<ActivityItem> getRecentActivity() throws Exception{
@@ -34,7 +32,6 @@ public class RecentActivityAPI extends APIResponseManager {
 		params.put("fr_id", fr_id);
 		
 		APIController apiUser = new APIController(API, METHOD, params);
-		apiUser.setCookie(cookie);
 		AsyncTask<Void, Void, Document>  task = apiUser.execute();
 		
 		doc = task.get();

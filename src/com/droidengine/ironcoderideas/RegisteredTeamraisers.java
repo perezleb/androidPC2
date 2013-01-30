@@ -23,11 +23,8 @@ public class RegisteredTeamraisers extends Activity{
 	private static final String TOKEN_KEY = "TOKEN";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
-	private static final String COOKIE_KEY = "COOKIE";
-	
 	private String token;
 	private String consID;
-	private String cookie;
 	private String frID;
 	
 	private RegisteredTeamraisersAPI regEvents;
@@ -41,10 +38,8 @@ public class RegisteredTeamraisers extends Activity{
         
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
-        cookie = getIntent().getStringExtra(COOKIE_KEY);
-        frID =  getIntent().getStringExtra(FR_ID_KEY);
         
-        if (token != null && consID != null && cookie != null){
+        if (token != null && consID != null){
         	teamraiserList = getTeamraiserList();
         	
         } else {
@@ -79,7 +74,6 @@ public class RegisteredTeamraisers extends Activity{
     	intent.putExtra(CONS_ID_KEY, consID);
     	intent.putExtra(TOKEN_KEY, token);
     	intent.putExtra(FR_ID_KEY, fr_id);
-    	intent.putExtra(COOKIE_KEY, cookie);
     	startActivity(intent);
 
 	}
@@ -93,7 +87,7 @@ public class RegisteredTeamraisers extends Activity{
 	private ArrayList getTeamraiserList(){
 		
 		if (regEvents == null){
-			regEvents = new RegisteredTeamraisersAPI(consID, cookie);
+			regEvents = new RegisteredTeamraisersAPI(consID);
 		}
 		
 		ArrayList list = new ArrayList();
