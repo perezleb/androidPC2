@@ -7,7 +7,7 @@ public class ActivityItem implements Item {
 	private String date;
 
 	public void setActivity(String activity){
-		this.activity = activity;
+		this.activity = activity.replaceAll("\n\n", " ").replaceAll("  ", " ");
 	}
 	
 	public void setDate(String date){

@@ -2,6 +2,7 @@ package com.droidengine.ironcoderideas;
 
 import java.util.ArrayList; 
 
+import com.droidengine.ironcoderideas.API.GetParticipantProgressAPI;
 import com.droidengine.ironcoderideas.API.RecentActivityAPI;
 import com.droidengine.ironcoderideas.ListAdapters.RecentActivityListBaseAdapter;
 import com.droidengine.ironcoderideas.ListItems.ActivityItem;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class Progress extends Activity {
 	
@@ -24,14 +26,17 @@ public class Progress extends Activity {
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
 	
-	
 	private String token;
 	private String consID;
 	private String frID;
 	
+	private GetParticipantProgressAPI participantProgress;
+	private TextView amountRaised;
+	private TextView myGoal;
+	private TextView daysLeft;
+	
 	private RecentActivityAPI activityAPI;
 	private ArrayList activityList;
-	
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class Progress extends Activity {
         
         if (token != null && consID != null & frID != null){
         	activityList = getRecentActivity();
+        	participantProgress = getProgress();
         	
         } else {
         	Log.d(TAG, "token or cons_id is null");
@@ -50,6 +56,16 @@ public class Progress extends Activity {
         }
         
         setContentView(R.layout.progress);
+        
+        amountRaised = (TextView)findViewById(R.id.amount_raised);
+        myGoal = (TextView)findViewById(R.id.fundraising_goal);
+        daysLeft = (TextView)findViewById(R.id.days_left);
+        
+        if (participantProgress != null){
+        	setAmountRaised(participantProgress.getAmountRaised());
+        	setGoal(participantProgress.getGoal());
+        	setDaysLeft(participantProgress.getDaysLeft());
+        }
         
         final ListView lv1 = (ListView) findViewById(R.id.donor_list);
         lv1.setAdapter(new RecentActivityListBaseAdapter(this, activityList));
@@ -92,6 +108,19 @@ public class Progress extends Activity {
     	startActivity(intent);
 	}
 	
+	private GetParticipantProgressAPI getProgress(){
+		GetParticipantProgressAPI progress = new GetParticipantProgressAPI(consID, frID);
+		
+		try{
+			progress.getProgress();
+		}catch(Exception e){
+			Log.d(TAG, e.toString());
+			return null;
+		}
+		
+		return progress;
+	}
+	
 	private ArrayList<ActivityItem> getRecentActivity(){
 		if (activityAPI == null){
 			activityAPI = new RecentActivityAPI(token, frID);
@@ -107,11 +136,27 @@ public class Progress extends Activity {
 		}
 		
 		ActivityListHeader header = new ActivityListHeader();
-		header.setHeader("Recent Donors");
+		header.setHeader("Recent Activity");
 		list.add(0, header);
-		
 
 		return list;
 	}
- 
+	
+	private void setAmountRaised(String amount){
+		if (amount != null){
+			amountRaised.setText(amount);
+		}
+	}
+	
+	private void setGoal(String goal){
+		if (goal != null){
+			myGoal.setText(goal);
+		}
+	}
+	
+	private void setDaysLeft(String days){
+		if (days != null){
+			daysLeft.setText(days);
+		}
+	}
 }

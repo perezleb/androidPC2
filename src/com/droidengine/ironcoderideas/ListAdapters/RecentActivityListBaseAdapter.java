@@ -71,7 +71,7 @@ public class RecentActivityListBaseAdapter extends BaseAdapter{
 				TextView activityDate = (TextView)v.findViewById(R.id.activity_date);
 				
 				if (activity != null){
-					activity.setText(activityItem.getActivity().replaceAll("\n", ""));
+					activity.setText(activityItem.getActivity());
 				}
 				
 				if (activityDate != null){
