@@ -6,6 +6,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import android.util.Log;
+
 public class APIResponseManager {
 	
 	private static final String TAG = "IRONCODER";
@@ -26,6 +28,7 @@ public class APIResponseManager {
 	    		NodeList errorNode = errorTag.item(0).getChildNodes();
 	    		if (errorNode.getLength() == 1){
 	    			errorMessage = errorNode.item(0).getNodeValue();
+	    			Log.d(TAG, errorMessage);
 	    		}
 	    	}
 	    	return true;

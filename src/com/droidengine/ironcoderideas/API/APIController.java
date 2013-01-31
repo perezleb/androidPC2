@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -31,21 +32,21 @@ import android.util.Log;
 
 public class APIController extends AsyncTask<Void, Void,  Document> {
 	
-	private static String TAG = "IRONCODER";
+	protected static String TAG = "IRONCODER";
 	
 	private static String URL = "http://qa217.bvt2.corp.convio.com/site/";
-	private static String KEY = "api_key";
-	private static String VERSION = "1.0";
+	protected static String KEY = "api_key";
+	protected static String VERSION = "1.0";
 	
-	private String api;
-	private String method;
-	private HashMap<String, String> arguments;	
+	protected String api;
+	protected String method;
+	protected Map<String, String> arguments;	
 	
-	private HttpClient client;
-	private InputStream xmlResponse;
+	protected HttpClient client;
+	protected InputStream xmlResponse;
 		
 	
-	public APIController(String api, String method, HashMap<String, String> params){		
+	public APIController(String api, String method, Map<String, String> params){		
 		this.api = api;
 		this.method = method;
 		this.arguments = params;
@@ -65,7 +66,7 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		return xmlResponse;
 	}
 
-	public InputStream doPost() {
+	public InputStream doPost() throws UnsupportedEncodingException {
 		String APIurl = generateRequest();
 		HttpPost post = new HttpPost(APIurl);
 		try {
@@ -84,8 +85,8 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		}
 	}
 	
-	private String generateRequest(){
-		String request = URL + api + "method=" + method + "&api_key=" + KEY + "&v=" + VERSION;
+	protected String generateRequest(){
+		String request = getURL() + api + "method=" + method + "&api_key=" + KEY + "&v=" + VERSION;
 		
 		Iterator it = arguments.entrySet().iterator();
 	    while (it.hasNext()) {
@@ -114,7 +115,13 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 
 	@Override
 	protected Document doInBackground(Void... arg0) {
-		InputStream response = doPost();
+		InputStream response = null;
+		try {
+			response = doPost();
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Document doc = null;
 		if (response == null) {
 			Log.d(TAG, "Error generating response");
@@ -156,5 +163,9 @@ public class APIController extends AsyncTask<Void, Void,  Document> {
 		}
 	    	    
 	    return db;
+	}
+
+	protected String getURL() {
+		return URL;
 	}
 }

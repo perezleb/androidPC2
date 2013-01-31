@@ -52,7 +52,8 @@
         </activity>
         <activity
             android:name=".MakeGift"
-            android:label="Make a Gift" >
+            android:label="Make a Gift"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".NearbyTeamraisersActivity"

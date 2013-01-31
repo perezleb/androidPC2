@@ -1,6 +1,9 @@
 package com.droidengine.ironcoderideas.API;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -52,12 +55,11 @@ public class GetParticipantProgressAPI extends APIResponseManager{
 	}
 	
 	public String getGoal(){
-		if (goal.equals("0")){
-			goal = "$" + goal + ".00";
-		} else {
-			goal = "$" + goal.substring(0, goal.length() - 2) + "." + goal.substring(goal.length() - 2, goal.length());
-		}
-		return goal;
+		Long amount = Long.parseLong(goal);
+		BigDecimal amt = BigDecimal.valueOf(amount.longValue(), 2);
+
+		NumberFormat fmt = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+		return fmt.format(amt);
 	}
 	
 	public String getAmountRaised(){
