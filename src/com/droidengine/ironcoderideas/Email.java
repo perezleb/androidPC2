@@ -100,6 +100,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 			return true;
 		} else if (item.getItemId() == R.id.logout) {
 			// logout
+			startLoginActivity();
 			return true;
 			
 		} else if (item.getItemId() == R.id.my_teamraisers){
@@ -130,6 +131,11 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		Intent intent = new Intent(this, RegisteredTeamraisers.class);
 		intent.putExtra(CONS_ID_KEY, consID);
     	intent.putExtra(TOKEN_KEY, token);
+    	startActivity(intent);
+	}
+	
+	private void startLoginActivity(){
+		Intent intent = new Intent(this, PCLoginActivity.class);		
     	startActivity(intent);
 	}
 

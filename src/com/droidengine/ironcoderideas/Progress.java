@@ -92,6 +92,7 @@ public class Progress extends Activity {
 			return true;
 		} else if (item.getItemId() == R.id.logout) {
 			// logout
+			startLoginActivity();
 			return true;
 			
 		} else if (item.getItemId() == R.id.my_teamraisers){
@@ -100,6 +101,11 @@ public class Progress extends Activity {
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	private void startLoginActivity(){
+		Intent intent = new Intent(this, PCLoginActivity.class);
+		startActivity(intent);
 	}
 	
 	private void startEmailActivity(){

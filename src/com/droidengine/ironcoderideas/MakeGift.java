@@ -132,6 +132,7 @@ public class MakeGift extends Activity implements OnClickListener {
 			return true;
 		} else if (item.getItemId() == R.id.logout) {
 			// logout
+			startLoginActivity();
 			return true;
 
 		} else if (item.getItemId() == R.id.my_teamraisers) {
@@ -140,6 +141,11 @@ public class MakeGift extends Activity implements OnClickListener {
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	private void startLoginActivity(){
+		Intent intent = new Intent(this, PCLoginActivity.class);
+		startActivity(intent);
 	}
 
 	private void startEmailActivity() {
