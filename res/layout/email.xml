@@ -37,7 +37,8 @@
         	android:layout_below="@+id/email_label"
         	android:layout_marginTop="10dp"
         	android:layout_marginLeft="12dp"
-        	android:layout_marginRight="22dp"/>
+        	android:layout_marginRight="22dp"
+        	android:scrollHorizontally="true"/>
     	
     	<TextView 
         	android:id="@+id/subject_email_label"

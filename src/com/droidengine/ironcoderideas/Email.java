@@ -31,7 +31,10 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	private String frID;
 	
 	private Button toButton;
+	private Button sendButton;
 	private EditText sendToEditText;
+	private EditText subjectEditText;
+	private EditText messageBodyEditText;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,11 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
         frID = getIntent().getStringExtra(FR_ID_KEY);
         
         sendToEditText = (EditText)findViewById(R.id.send_to_emails);
+        subjectEditText = (EditText)findViewById(R.id.email_subject);
+        messageBodyEditText = (EditText)findViewById(R.id.email_content);
+        
+        sendButton = (Button)findViewById(R.id.send_email_button);
+        sendButton.setOnClickListener(this);
         toButton = (Button)findViewById(R.id.send_to_button);
         toButton.setOnClickListener(this);
     }
@@ -52,8 +60,17 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		switch(v.getId()){
 		case R.id.send_to_button:
 			openContactDialog();
+		case R.id.send_email_button:
+			sendEmail();
 		}
 		
+	}
+	
+	private void sendEmail(){
+		String emailSubject = subjectEditText.getText().toString();
+		String emailMessage = messageBodyEditText.getText().toString();
+		
+		//make call to send email
 	}
 	
 	private void openContactDialog(){

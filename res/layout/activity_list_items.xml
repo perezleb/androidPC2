@@ -16,8 +16,7 @@
 	    android:id="@+id/activity_date" 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:paddingRight="3dp"
-	    android:layout_alignParentRight="true"
+		android:layout_below="@id/activity"	   
 	    android:paddingLeft="3dp"
 	    android:textSize="17sp"
 	    android:text="Activity Date"/>
