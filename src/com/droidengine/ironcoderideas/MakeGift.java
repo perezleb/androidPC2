@@ -223,6 +223,7 @@ public class MakeGift extends Activity implements OnClickListener {
 				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						finish();
+						startProgressActivity();
 					}
 				});
 

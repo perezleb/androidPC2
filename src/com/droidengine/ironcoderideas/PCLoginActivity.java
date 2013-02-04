@@ -1,8 +1,6 @@
 package com.droidengine.ironcoderideas;
 
 import com.droidengine.ironcoderideas.API.PCLoginAPI;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,17 +58,15 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		}
 		
 		pcLogin = new PCLoginAPI(username, password);
-		
-//		ProgressDialog loadingDialog = ProgressDialog.show(PCLoginActivity.this, "", "Loading...", true); 
+		ProgressDialog loadingDialog = ProgressDialog.show(PCLoginActivity.this, "", "Loading...", true); 
 		
 		try {
 			pcLogin.login();
 		} catch (Exception e) {	
 			displayErrorDialog(e.toString());
 		}
-//		} finally {
-//			loadingDialog.dismiss();
-//		}
+		
+		loadingDialog.dismiss();
 				
 		Intent intent = new Intent(this, RegisteredTeamraisers.class);
     	intent.putExtra(CONS_ID_KEY, pcLogin.consID);

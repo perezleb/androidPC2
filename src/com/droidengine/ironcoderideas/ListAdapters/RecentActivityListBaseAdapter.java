@@ -6,9 +6,6 @@ import com.droidengine.ironcoderideas.R;
 import com.droidengine.ironcoderideas.ListItems.ActivityItem;
 import com.droidengine.ironcoderideas.ListItems.ActivityListHeader;
 import com.droidengine.ironcoderideas.ListItems.Item;
-import com.droidengine.ironcoderideas.R.id;
-import com.droidengine.ironcoderideas.R.layout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +24,6 @@ public class RecentActivityListBaseAdapter extends BaseAdapter{
 		l_Inflater = LayoutInflater.from(context);
 	}
 	
-	@Override
 	public int getCount() {
 		return activityList.size();
 	}

@@ -40,7 +40,9 @@ public class Progress extends Activity {
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        
+		Log.d(TAG, "Progress: onCreate");
+		super.onCreate(savedInstanceState);
         
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
@@ -71,6 +73,13 @@ public class Progress extends Activity {
         lv1.setAdapter(new RecentActivityListBaseAdapter(this, activityList));
     }
 	
+	@Override
+	protected void onRestart(){
+		Log.d(TAG, "Progress: onRestart");
+		super.onRestart();
+		startActivity(getIntent());
+	}
+		
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.nav_menu, menu);

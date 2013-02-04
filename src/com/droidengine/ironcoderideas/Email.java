@@ -3,9 +3,10 @@ package com.droidengine.ironcoderideas;
 import java.util.ArrayList;
 
 import com.droidengine.ironcoderideas.API.GetAddressBookContacts.Contact;
+import com.droidengine.ironcoderideas.API.SendEmailAPI;
 
-import android.app.Activity;
-import android.app.Dialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -60,8 +61,10 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		switch(v.getId()){
 		case R.id.send_to_button:
 			openContactDialog();
+			break;
 		case R.id.send_email_button:
 			sendEmail();
+			break;
 		}
 		
 	}
@@ -69,8 +72,53 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	private void sendEmail(){
 		String emailSubject = subjectEditText.getText().toString();
 		String emailMessage = messageBodyEditText.getText().toString();
+		String recipients = sendToEditText.getText().toString();
 		
-		//make call to send email
+		SendEmailAPI emailAPI = new SendEmailAPI(token, frID, emailSubject, emailMessage, recipients);
+		
+		try {
+			emailAPI.sendEmail();
+		} catch(Exception e){
+			Log.d(TAG, e.toString());
+		}
+						
+		if (emailAPI.messageSuccess().equals("true")){
+			showSuccessDialog();
+		} else {
+			showFailedDialog();
+		}
+	}
+	
+	private void showFailedDialog(){
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+		String message = "Email Failed";
+		
+		alt_bld.setMessage(message).setCancelable(false)
+		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				finish();
+				onRestart();
+			}
+		});
+
+		AlertDialog alert = alt_bld.create();
+		alert.show();
+	}
+	
+	private void showSuccessDialog(){
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+		String message = "Email Sent Successfully";
+		
+		alt_bld.setMessage(message).setCancelable(false)
+		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				finish();
+				startProgressActivity();
+			}
+		});
+
+		AlertDialog alert = alt_bld.create();
+		alert.show();
 	}
 	
 	private void openContactDialog(){
