@@ -97,6 +97,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				finish();
+				onRestart();
 			}
 		});
 
@@ -112,6 +113,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				finish();
+				startProgressActivity();
 			}
 		});
 

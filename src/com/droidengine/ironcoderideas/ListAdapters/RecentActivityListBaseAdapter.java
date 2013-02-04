@@ -24,7 +24,6 @@ public class RecentActivityListBaseAdapter extends BaseAdapter{
 		l_Inflater = LayoutInflater.from(context);
 	}
 	
-	@Override
 	public int getCount() {
 		return activityList.size();
 	}
