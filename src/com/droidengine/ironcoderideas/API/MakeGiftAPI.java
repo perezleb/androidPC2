@@ -1,8 +1,6 @@
 package com.droidengine.ironcoderideas.API;
 
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
 import android.util.Log;
 
 public class MakeGiftAPI extends APIResponseManager {

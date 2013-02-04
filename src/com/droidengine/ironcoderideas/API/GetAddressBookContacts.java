@@ -49,7 +49,7 @@ public class GetAddressBookContacts extends APIResponseManager{
 		
 		for(int i = 0; i < contacts.getLength(); i++){
 			element = (Element)contacts.item(i);
-			if (getElementValue(element.getElementsByTagName("email")) != null){
+			if (getElementValue(element.getElementsByTagName("email")) != null && getElementValue(element.getElementsByTagName("firstName")) != null){
 				name = getElementValue(element.getElementsByTagName("firstName")) + " " + getElementValue(element.getElementsByTagName("lastName"));
 				email = getElementValue(element.getElementsByTagName("email"));
 				

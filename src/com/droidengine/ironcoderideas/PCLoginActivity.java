@@ -1,8 +1,6 @@
 package com.droidengine.ironcoderideas;
 
 import com.droidengine.ironcoderideas.API.PCLoginAPI;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

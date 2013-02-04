@@ -6,9 +6,6 @@ import com.droidengine.ironcoderideas.R;
 import com.droidengine.ironcoderideas.ListItems.ActivityItem;
 import com.droidengine.ironcoderideas.ListItems.ActivityListHeader;
 import com.droidengine.ironcoderideas.ListItems.Item;
-import com.droidengine.ironcoderideas.R.id;
-import com.droidengine.ironcoderideas.R.layout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
