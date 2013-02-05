@@ -26,6 +26,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	private static final String TOKEN_KEY = "TOKEN";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
+	private static final String LOGIN_ERROR_KEY = "ERROR";
 	
 	private String token;
 	private String consID;
@@ -39,12 +40,24 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.email);
+        super.onCreate(savedInstanceState);        
         
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
         frID = getIntent().getStringExtra(FR_ID_KEY);
+        
+        if (token == null || consID == null || frID == null){
+			Log.d(TAG, "token or cons_id is null");
+        	// Kick back to login screen
+        	
+        	Intent intent = new Intent(this, PCLoginActivity.class);
+        	intent.putExtra(LOGIN_ERROR_KEY, "ERROR");
+        	
+    		startActivity(intent);
+        	return;
+		}
+        
+        setContentView(R.layout.email);
         
         sendToEditText = (EditText)findViewById(R.id.send_to_emails);
         subjectEditText = (EditText)findViewById(R.id.email_subject);
@@ -80,6 +93,8 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 			emailAPI.sendEmail();
 		} catch(Exception e){
 			Log.d(TAG, e.toString());
+			showFailedDialog();
+			return;
 		}
 						
 		if (emailAPI.messageSuccess().equals("true")){

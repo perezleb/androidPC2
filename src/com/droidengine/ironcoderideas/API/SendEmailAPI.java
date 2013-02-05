@@ -44,7 +44,7 @@ public class SendEmailAPI extends APIResponseManager{
 		params.put("message_body", message);
 				
 		
-		APIController controller = new APIController(API, METHOD, params);
+		APIController controller = new SecureAPIController(API, METHOD, params);
 		controller.execute();
 		doc = controller.get();
 		

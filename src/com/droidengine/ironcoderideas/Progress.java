@@ -25,6 +25,7 @@ public class Progress extends Activity {
 	private static final String TOKEN_KEY = "TOKEN";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
+	private static final String LOGIN_ERROR_KEY = "ERROR";
 	
 	private String token;
 	private String consID;
@@ -54,7 +55,13 @@ public class Progress extends Activity {
         	
         } else {
         	Log.d(TAG, "token or cons_id is null");
-        	//TODO show error message
+        	// Kick back to login screen
+        	
+        	Intent intent = new Intent(this, PCLoginActivity.class);
+        	intent.putExtra(LOGIN_ERROR_KEY, "ERROR");
+        	
+    		startActivity(intent);
+        	return;
         }
         
         setContentView(R.layout.progress);
