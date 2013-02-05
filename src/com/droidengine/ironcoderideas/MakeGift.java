@@ -58,6 +58,9 @@ public class MakeGift extends Activity implements OnClickListener {
 	private TextView billingCity;
 	private TextView billingState;
 	private TextView billingZip;
+	
+	private Button emailNavButton;
+	private Button progressNavButton;
 
 	private RelativeLayout cardBillingInfo;
 
@@ -107,6 +110,11 @@ public class MakeGift extends Activity implements OnClickListener {
 
 		submitGiftButton = (Button) findViewById(R.id.submitGift);
 		submitGiftButton.setOnClickListener(this);
+		
+		emailNavButton = (Button) findViewById(R.id.email_nav_button);
+		emailNavButton.setOnClickListener(this);
+		progressNavButton = (Button) findViewById(R.id.progress_nav_button);
+		progressNavButton.setOnClickListener(this);
 
 	}
 
@@ -132,22 +140,10 @@ public class MakeGift extends Activity implements OnClickListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.progress) {
+		if (item.getItemId() == R.id.logout) {
 			// go to progress page
-			startProgressActivity();
-			return true;
-		} else if (item.getItemId() == R.id.email) {
-			// go to email page
-			startEmailActivity();
-			return true;
-		} else if (item.getItemId() == R.id.make_gift) {
-			// do nothing
-			return true;
-		} else if (item.getItemId() == R.id.logout) {
-			// logout
 			startLoginActivity();
-			return true;
-
+			return true;		
 		} else if (item.getItemId() == R.id.my_teamraisers) {
 			startRegisteredTeamraisersActivity();
 			return true;
@@ -215,6 +211,12 @@ public class MakeGift extends Activity implements OnClickListener {
 
 			AlertDialog alert = alt_bld.create();
 			alert.show();
+		}
+		else if (v.getId() == R.id.email_nav_button){
+			startEmailActivity();
+		}
+		else if (v.getId() == R.id.progress_nav_button){
+			startProgressActivity();
 		}
 	}
 

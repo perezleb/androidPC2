@@ -1,11 +1,5 @@
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/progress"
-          android:title="Progress" />
-    <item android:id="@+id/email"
-          android:title="Email" />
-    <item android:id="@+id/make_gift"
-          android:title="Make Gift" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android">    
     <item android:id="@+id/my_teamraisers"
           android:title="Teamraisers" />
     <item android:id="@+id/logout"

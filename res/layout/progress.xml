@@ -3,23 +3,58 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <TextView 
-        android:id="@+id/progress_label"
+    <RelativeLayout
+        android:id="@+id/navigation_bar" 
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="#75A3FF"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="My Fundraising Progress"/>
+        android:background="#75A3FF"        
+        android:paddingBottom="5dp">
+
+   		<Button
+   		    android:id="@+id/progress_nav_button"
+   		    android:layout_width="100dip"
+   		    android:layout_height="42dip"
+   		    android:layout_marginTop="5dp"
+   		    android:background="@drawable/nav_button_selected"
+   		    android:textColor="#FFFFFF"
+   			android:textStyle="bold"
+   			android:textSize="18sp"   		    
+   		    android:text="Progress" />
+
+   		<Button
+   		    android:id="@+id/make_gift_nav_button" 
+   		    android:layout_width="100dip"
+   		    android:layout_height="42dip"
+   		    android:layout_toRightOf="@id/progress_nav_button"
+   		    android:layout_marginLeft="5dp"
+   		    android:layout_marginTop="5dp"
+   		    android:background="@drawable/nav_button_selector"
+   		    android:textColor="#FFFFFF"
+   			android:textStyle="bold"
+   			android:textSize="18sp"
+   		    android:text="Make Gift"/>
+   		<Button
+   		    android:id="@+id/email_nav_button" 
+   		    android:layout_width="100dip"
+   		    android:layout_height="42dip"
+   		    android:layout_toRightOf="@id/make_gift_nav_button"
+   		    android:layout_marginLeft="5dp"
+   		    android:layout_marginTop="5dp"
+   		    android:background="@drawable/nav_button_selector"
+   		    android:textColor="#FFFFFF"
+   			android:textStyle="bold"
+   			android:textSize="18sp"
+   		    android:text="Email"/>
+   		             
+    </RelativeLayout>
+    
     
     <TableLayout 
         android:id="@+id/progress_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/progress_label"
+        android:layout_below="@id/navigation_bar"
 		android:layout_centerHorizontal="true"
         android:paddingTop="15dp"
         android:paddingBottom="25dp">

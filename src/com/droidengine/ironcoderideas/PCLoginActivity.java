@@ -64,7 +64,10 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		
 		String username = usernameEditText.getText().toString();
 		String password = passwordEditText.getText().toString();
-				
+		
+		username = "kmartinez";
+		password = "kmartinez";
+								
 		if (username.equals("") || password.equals("")){
 			Log.d(TAG, "Missing Username or Password");
 			displayErrorDialog("Missing username or password");
