@@ -87,6 +87,7 @@ public class RegisteredTeamraisers extends Activity{
 	
 	private void openFindTeamraiserPage(){
 		Intent intent = new Intent(this, NearbyTeamraisersActivity.class);
+		intent.putExtra(TOKEN_KEY, token);
     	startActivity(intent);
 		
 	}

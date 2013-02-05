@@ -42,10 +42,18 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 	private List<TeamraiserItem> teamraisers;
 	private HashMap<Marker, TeamraiserItem> eventMarkerMap;
 
+	private static final String TOKEN_KEY = "TOKEN";
+	private static final String URL = "URL";
+
+
+	private String token;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+        token = getIntent().getStringExtra(TOKEN_KEY);
+
 		geocoder = new Geocoder(this);
 		eventMarkerMap = new HashMap<Marker, TeamraiserItem>();
 				
@@ -172,8 +180,11 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 	public void onInfoWindowClick(Marker marker) {
 		 TeamraiserItem item = eventMarkerMap.get(marker);
 		   if(item != null){
-			   Intent register = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getUrl()));
-			   startActivity(register);
+			   String url = item.getUrl();
+			   Intent intent = new Intent(this, RegistrationActivity.class);
+			   intent.putExtra(TOKEN_KEY, token);
+			   intent.putExtra(URL, url);
+			   startActivity(intent);
 		   }
 	}
 

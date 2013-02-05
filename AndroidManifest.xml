@@ -59,7 +59,11 @@
             android:name="com.droidengine.ironcoderideas.NearbyTeamraisersActivity"
             android:label="Nearby Teamraisers" >
         </activity>
-
+        <activity
+            android:name="com.droidengine.ironcoderideas.RegistrationActivity"
+            android:label="Register" >
+        </activity>
+        
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBvijAcDptneQJyfd6rOCeSrrilwoyCq5U" />
