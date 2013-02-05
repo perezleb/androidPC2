@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -38,6 +39,7 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 	private GoogleMap mMap;
 	private Geocoder geocoder;
 	private Location currentLocation;
+	private ProgressDialog loading;
 	
 	private List<TeamraiserItem> teamraisers;
 	private HashMap<Marker, TeamraiserItem> eventMarkerMap;
@@ -51,6 +53,10 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		loading = new ProgressDialog(this);
+		loading.setMessage("Finding Teamraisers");
+		loading.show();
 		
         token = getIntent().getStringExtra(TOKEN_KEY);
 
@@ -66,6 +72,8 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 			public void onLocationChanged(Location location) {
 				currentLocation = location;
 				processLocation();
+				if(loading.isShowing())
+					loading.dismiss();
 				locationManager.removeUpdates(this);
 			}
 
@@ -75,7 +83,7 @@ public class NearbyTeamraisersActivity extends android.support.v4.app.FragmentAc
 
 			public void onProviderDisabled(String provider) { }
 		};
-
+		
 		locationManager.requestLocationUpdates( LocationManager.NETWORK_PROVIDER, 0, 1609 * 2, locationListener);
 
 	}
