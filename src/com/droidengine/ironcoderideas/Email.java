@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.droidengine.ironcoderideas.API.GetAddressBookContacts.Contact;
 import com.droidengine.ironcoderideas.API.SendEmailAPI;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +40,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	private EditText subjectEditText;
 	private EditText messageBodyEditText;
 	
+	@SuppressLint("NewApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);        
@@ -58,6 +61,11 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		}
         
         setContentView(R.layout.email);
+        
+		ActionBar actionBar = getActionBar();
+		if(actionBar != null){
+			actionBar.setDisplayShowHomeEnabled(false);
+		}
         
         sendToEditText = (EditText)findViewById(R.id.send_to_emails);
         subjectEditText = (EditText)findViewById(R.id.email_subject);
@@ -142,9 +150,11 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 		contactDialog.show(getSupportFragmentManager(), "Contacts");
 	}
 	
+	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.nav_menu, menu);
+	    menu.removeItem(R.id.email);
 	    return true;
 	}
 	
