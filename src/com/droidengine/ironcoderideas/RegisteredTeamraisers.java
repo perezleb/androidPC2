@@ -7,6 +7,8 @@ import com.droidengine.ironcoderideas.ListAdapters.RegisteredTeamraiserListAdapt
 import com.droidengine.ironcoderideas.ListItems.FindTeamraisersItem;
 import com.droidengine.ironcoderideas.ListItems.TeamraiserItem;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ public class RegisteredTeamraisers extends Activity{
 	private ArrayList teamraiserList;
 	
 	
+	@SuppressLint("NewApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,15 @@ public class RegisteredTeamraisers extends Activity{
         }
         
         setContentView(R.layout.registered_teamraisers);
+        
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= 11){
+        	ActionBar actionBar = getActionBar();
+    		if(actionBar != null){
+    			actionBar.setDisplayShowHomeEnabled(false);
+    		}
+        	
+        }
         
         final ListView lv1 = (ListView) findViewById(R.id.registered_teamraisers_list);
         lv1.setAdapter(new RegisteredTeamraiserListAdapter(this, teamraiserList));

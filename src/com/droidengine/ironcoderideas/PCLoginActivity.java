@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 
 public class PCLoginActivity extends Activity implements OnClickListener{
 	
@@ -26,10 +29,20 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 	public EditText passwordEditText;
 	public Button loginButton;
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pc_login);
+        
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= 11){
+        	ActionBar actionBar = getActionBar();
+    		if(actionBar != null){
+    			actionBar.setDisplayShowHomeEnabled(false);
+    		}
+        	
+        }
         
         String loginError = getIntent().getStringExtra(LOGIN_ERROR_KEY);        
         

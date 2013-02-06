@@ -4,17 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context=".PCLoginActivity" >
-    <TextView 
-        android:id="@+id/participant_center_label"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:background="#75A3FF"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Participant Center"/>  
     
     <TableLayout
         android:layout_width="wrap_content"
