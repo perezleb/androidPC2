@@ -12,20 +12,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Progress extends Activity implements OnClickListener{
+public class Progress extends Activity {
 	
 	private static final String TAG = "IRONCODER";
 	
@@ -45,9 +38,6 @@ public class Progress extends Activity implements OnClickListener{
 	
 	private RecentActivityAPI activityAPI;
 	private ArrayList activityList;
-	
-	private Button emailNavButton;
-	private Button makeGiftNavButton;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +70,6 @@ public class Progress extends Activity implements OnClickListener{
         myGoal = (TextView)findViewById(R.id.fundraising_goal);
         daysLeft = (TextView)findViewById(R.id.days_left);
         
-        emailNavButton = (Button)findViewById(R.id.email_nav_button);
-        emailNavButton.setOnClickListener(this);
-        
-        makeGiftNavButton = (Button)findViewById(R.id.make_gift_nav_button);
-        makeGiftNavButton.setOnClickListener(this);
-        
         if (participantProgress != null){
         	setAmountRaised(participantProgress.getAmountRaised());
         	setGoal(participantProgress.getGoal());
@@ -94,9 +78,7 @@ public class Progress extends Activity implements OnClickListener{
         
         final ListView lv1 = (ListView) findViewById(R.id.donor_list);
         lv1.setAdapter(new RecentActivityListBaseAdapter(this, activityList));
-                
-    }	
-	
+    }
 	
 	@Override
 	protected void onRestart(){
@@ -113,10 +95,22 @@ public class Progress extends Activity implements OnClickListener{
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.logout) {
+		if (item.getItemId() == R.id.progress) {
 			// do nothing
+			return true;
+		} else if (item.getItemId() == R.id.email) {
+			//go to email page
+			startEmailActivity();
+			return true;
+		} else if (item.getItemId() == R.id.make_gift) {
+			//go to make gift page
+			startGiftActivity();
+			return true;
+		} else if (item.getItemId() == R.id.logout) {
+			// logout
 			startLoginActivity();
-			return true;			
+			return true;
+			
 		} else if (item.getItemId() == R.id.my_teamraisers){
 			startRegisteredTeamraisersActivity();
 			return true;
@@ -203,15 +197,5 @@ public class Progress extends Activity implements OnClickListener{
 		if (days != null){
 			daysLeft.setText(days);
 		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.email_nav_button){
-			startEmailActivity();
-		}
-		else if (v.getId() == R.id.make_gift_nav_button){
-			startGiftActivity();
-		}		
 	}
 }

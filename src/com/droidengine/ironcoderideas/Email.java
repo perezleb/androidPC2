@@ -38,9 +38,6 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	private EditText subjectEditText;
 	private EditText messageBodyEditText;
 	
-	private Button progressNavButton;
-	private Button makeGiftNavButton;
-	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);        
@@ -70,10 +67,6 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
         sendButton.setOnClickListener(this);
         toButton = (Button)findViewById(R.id.send_to_button);
         toButton.setOnClickListener(this);
-        progressNavButton = (Button)findViewById(R.id.progress_nav_button);
-        progressNavButton.setOnClickListener(this);
-        makeGiftNavButton = (Button)findViewById(R.id.make_gift_nav_button);
-        makeGiftNavButton.setOnClickListener(this);
     }
 	
 	@Override
@@ -84,12 +77,6 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 			break;
 		case R.id.send_email_button:
 			sendEmail();
-			break;
-		case R.id.progress_nav_button:
-			startProgressActivity();
-			break;
-		case R.id.make_gift_nav_button:
-			startGiftActivity();
 			break;
 		}
 		
@@ -163,10 +150,22 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.logout) {
+		if (item.getItemId() == R.id.progress) {
 			//go to progress page
+			startProgressActivity();
+			return true;
+		} else if (item.getItemId() == R.id.email) {
+			//do nothing
+			return true;
+		} else if (item.getItemId() == R.id.make_gift) {
+			//go to make gift page
+			startGiftActivity();
+			return true;
+		} else if (item.getItemId() == R.id.logout) {
+			// logout
 			startLoginActivity();
-			return true;					
+			return true;
+			
 		} else if (item.getItemId() == R.id.my_teamraisers){
 			startRegisteredTeamraisersActivity();
 			return true;
