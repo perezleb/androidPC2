@@ -22,17 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Email extends FragmentActivity implements OnClickListener, ContactDialog.NoticeDialogListener{
-	private static final String TAG = "IRONCODER";
-	
-	private static final String TOKEN_KEY = "TOKEN";
-	private static final String CONS_ID_KEY = "CONS_ID";
-	private static final String FR_ID_KEY = "FR_ID";
-	private static final String LOGIN_ERROR_KEY = "ERROR";
-	
-	private String token;
-	private String consID;
-	private String frID;
+public class Email extends AbstractPCActivity implements OnClickListener, ContactDialog.NoticeDialogListener{
 	
 	private Button toButton;
 	private Button sendButton;
@@ -43,11 +33,8 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	@SuppressLint("NewApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        
-        
-        token = getIntent().getStringExtra(TOKEN_KEY);
-        consID = getIntent().getStringExtra(CONS_ID_KEY);
-        frID = getIntent().getStringExtra(FR_ID_KEY);
+        super.onCreate(savedInstanceState); 
+        getConstituent(getIntent());
         
         if (token == null || consID == null || frID == null){
 			Log.d(TAG, "token or cons_id is null");
@@ -62,10 +49,7 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
         
         setContentView(R.layout.email);
         
-		ActionBar actionBar = getActionBar();
-		if(actionBar != null){
-			actionBar.setDisplayShowHomeEnabled(false);
-		}
+        buildActionBar();
         
         sendToEditText = (EditText)findViewById(R.id.send_to_emails);
         subjectEditText = (EditText)findViewById(R.id.email_subject);
@@ -158,59 +142,6 @@ public class Email extends FragmentActivity implements OnClickListener, ContactD
 	    return true;
 	}
 	
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.progress) {
-			//go to progress page
-			startProgressActivity();
-			return true;
-		} else if (item.getItemId() == R.id.email) {
-			//do nothing
-			return true;
-		} else if (item.getItemId() == R.id.make_gift) {
-			//go to make gift page
-			startGiftActivity();
-			return true;
-		} else if (item.getItemId() == R.id.logout) {
-			// logout
-			startLoginActivity();
-			return true;
-			
-		} else if (item.getItemId() == R.id.my_teamraisers){
-			startRegisteredTeamraisersActivity();
-			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
-	private void startProgressActivity(){
-		Intent intent = new Intent(this, Progress.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-    	intent.putExtra(TOKEN_KEY, token);
-    	intent.putExtra(FR_ID_KEY, frID);
-    	startActivity(intent);
-	}
-	
-	private void startGiftActivity(){
-		Intent intent = new Intent(this, MakeGift.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-    	intent.putExtra(TOKEN_KEY, token);
-    	intent.putExtra(FR_ID_KEY, frID);
-    	startActivity(intent);
-	}
-	
-	private void startRegisteredTeamraisersActivity(){
-		Intent intent = new Intent(this, RegisteredTeamraisers.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-    	intent.putExtra(TOKEN_KEY, token);
-    	startActivity(intent);
-	}
-	
-	private void startLoginActivity(){
-		Intent intent = new Intent(this, PCLoginActivity.class);		
-    	startActivity(intent);
-	}
 
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog) {

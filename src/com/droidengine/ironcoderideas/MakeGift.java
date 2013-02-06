@@ -24,18 +24,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MakeGift extends Activity implements OnClickListener {
-
-	private static final String TAG = "IRONCODER";
-
-	private static final String TOKEN_KEY = "TOKEN";
-	private static final String CONS_ID_KEY = "CONS_ID";
-	private static final String FR_ID_KEY = "FR_ID";
-	private static final String LOGIN_ERROR_KEY = "ERROR";
-
-	private String token;
-	private String consID;
-	private String frID;
+public class MakeGift extends AbstractPCActivity implements OnClickListener {
 
 	public Button submitGiftButton;
 
@@ -64,10 +53,7 @@ public class MakeGift extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		token = getIntent().getStringExtra(TOKEN_KEY);
-		consID = getIntent().getStringExtra(CONS_ID_KEY);
-		frID = getIntent().getStringExtra(FR_ID_KEY);
+		getConstituent(getIntent());
 		
 		if (token == null || consID == null || frID == null){
 			Log.d(TAG, "token or cons_id is null");
@@ -81,6 +67,8 @@ public class MakeGift extends Activity implements OnClickListener {
 		}
 		
 		setContentView(R.layout.make_gift);
+		
+		buildActionBar();
 
 		cardBillingInfo = (RelativeLayout) findViewById(R.id.cardBillingInfo);
 		cardBillingInfo.setVisibility(View.GONE);		
@@ -129,61 +117,7 @@ public class MakeGift extends Activity implements OnClickListener {
 		inflater.inflate(R.menu.nav_menu, menu);
 		return true;
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.progress) {
-			// go to progress page
-			startProgressActivity();
-			return true;
-		} else if (item.getItemId() == R.id.email) {
-			// go to email page
-			startEmailActivity();
-			return true;
-		} else if (item.getItemId() == R.id.make_gift) {
-			// do nothing
-			return true;
-		} else if (item.getItemId() == R.id.logout) {
-			// logout
-			startLoginActivity();
-			return true;
-
-		} else if (item.getItemId() == R.id.my_teamraisers) {
-			startRegisteredTeamraisersActivity();
-			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
-		}
-	}
 	
-	private void startLoginActivity(){
-		Intent intent = new Intent(this, PCLoginActivity.class);
-		startActivity(intent);
-	}
-
-	private void startEmailActivity() {
-		Intent intent = new Intent(this, Email.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-		intent.putExtra(TOKEN_KEY, token);
-		intent.putExtra(FR_ID_KEY, frID);
-		startActivity(intent);
-	}
-
-	private void startProgressActivity() {
-		Intent intent = new Intent(this, Progress.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-		intent.putExtra(TOKEN_KEY, token);
-		intent.putExtra(FR_ID_KEY, frID);
-		startActivity(intent);
-	}
-
-	private void startRegisteredTeamraisersActivity() {
-		Intent intent = new Intent(this, RegisteredTeamraisers.class);
-		intent.putExtra(CONS_ID_KEY, consID);
-		intent.putExtra(TOKEN_KEY, token);
-		startActivity(intent);
-	}
-
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.submitGift) {
