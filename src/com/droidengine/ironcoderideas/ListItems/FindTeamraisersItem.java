@@ -2,7 +2,7 @@ package com.droidengine.ironcoderideas.ListItems;
 
 public class FindTeamraisersItem implements Item{
 
-	private static final String label = "Find Teamraiser Event Near You";
+	private static final String label = "Find More Teamraisers Near You";
 	
 	public String getLabelText(){
 		return label;
