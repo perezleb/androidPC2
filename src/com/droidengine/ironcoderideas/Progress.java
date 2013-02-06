@@ -110,10 +110,6 @@ public class Progress extends AbstractPCActivity {
 		} catch(Exception e){
 			Log.d(TAG, e.toString());
 		}
-		
-		ActivityListHeader header = new ActivityListHeader();
-		header.setHeader("Recent Activity");
-		list.add(0, header);
 
 		return list;
 	}

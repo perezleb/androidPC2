@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
-        android:paddingTop="15dp"
-        android:paddingBottom="25dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
         
         <TableRow>
 	            <TextView
@@ -67,10 +67,22 @@
 			    
         </TableRow>
     </TableLayout>
+    <TextView 
+        android:id="@+id/activity_list_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_table"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:text="Recent Activity"
+		android:padding="2dp"
+		android:paddingLeft="8dp"
+        android:background="#009933"/>
     <ListView
 	 	android:layout_width="fill_parent"
 	 	android:layout_height="match_parent"
-	 	android:layout_below="@id/progress_table"
+	 	android:layout_below="@id/activity_list_header"
 	 	android:layout_alignParentBottom="true"	 
 	 	android:id="@+id/donor_list"
 	 	android:background="#FFFFFF"
