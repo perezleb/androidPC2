@@ -48,7 +48,8 @@
         </activity>
         <activity
             android:name="com.droidengine.ironcoderideas.Email"
-            android:label="Email" >
+            android:label="Email"
+			android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.droidengine.ironcoderideas.MakeGift"

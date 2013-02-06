@@ -81,6 +81,7 @@ public class RegisteredTeamraisers extends Activity{
     	intent.putExtra(CONS_ID_KEY, consID);
     	intent.putExtra(TOKEN_KEY, token);
     	intent.putExtra(FR_ID_KEY, fr_id);
+    	//TODO:insert team information
     	startActivity(intent);
 
 	}
@@ -88,6 +89,7 @@ public class RegisteredTeamraisers extends Activity{
 	private void openFindTeamraiserPage(){
 		Intent intent = new Intent(this, NearbyTeamraisersActivity.class);
 		intent.putExtra(TOKEN_KEY, token);
+		intent.putExtra(CONS_ID_KEY, consID);
     	startActivity(intent);
 		
 	}
