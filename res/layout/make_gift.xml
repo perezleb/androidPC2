@@ -9,7 +9,6 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
@@ -18,7 +17,19 @@
             android:layout_alignRight="@+id/editText1"
             android:text="@string/make_gift_instructions"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="12sp" />
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/giftAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/giftFirstName"
+            android:layout_alignRight="@+id/giftFirstName"
+            android:layout_below="@+id/textView1"
+            android:ems="10"
+            android:hint="@string/make_gift_amount_label"
+            android:inputType="numberDecimal"
+            android:textSize="48sp"  />
 
         <EditText
             android:id="@+id/giftFirstName"
@@ -26,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView1"
+            android:layout_below="@+id/giftAmount"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="22dp"
             android:layout_marginTop="22dp"
@@ -57,24 +68,13 @@
             android:hint="@string/email_label"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/giftAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/giftFirstName"
-            android:layout_alignRight="@+id/giftFirstName"
-            android:layout_below="@+id/giftEmail"
-            android:ems="10"
-            android:hint="@string/make_gift_amount_label"
-            android:inputType="numberDecimal" />
-
         <RadioGroup
             android:id="@+id/paymentMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/giftFirstName"
             android:layout_alignRight="@+id/giftFirstName"
-            android:layout_below="@+id/giftAmount"
+            android:layout_below="@+id/giftEmail"
             android:layout_marginTop="21dp" >
 
             <RadioButton

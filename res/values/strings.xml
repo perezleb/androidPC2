@@ -8,7 +8,7 @@
     <string name="make_gift_first_name">First Name</string>
     <string name="make_gift_last_name">Last Name</string>
     <string name="email_label">Email</string>
-    <string name="make_gift_amount_label">Amount</string>
+    <string name="make_gift_amount_label">$0.00</string>
     <string name="make_gift_cash">Cash</string>
     <string name="make_gift_credit">Credit Card</string>
     <string name="make_gift_card_number_label">Card Number</string>

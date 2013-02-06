@@ -57,18 +57,16 @@ public class GetParticipantProgressAPI extends APIResponseManager{
 	public String getGoal(){
 		Long amount = Long.parseLong(goal);
 		BigDecimal amt = BigDecimal.valueOf(amount.longValue(), 2);
-
 		NumberFormat fmt = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
 		return fmt.format(amt);
 	}
 	
 	public String getAmountRaised(){
-		if (amountRaised.equals("0")){
-			amountRaised = "$" + amountRaised + ".00";
-		} else {
-			amountRaised = "$" + amountRaised.substring(0, amountRaised.length() - 2) + "." + amountRaised.substring(amountRaised.length() - 2, amountRaised.length());
-		}
-		return amountRaised;
+		Long amount = Long.parseLong(amountRaised);
+		BigDecimal amt = BigDecimal.valueOf(amount.longValue(), 2);
+		NumberFormat fmt = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+		return fmt.format(amt);
+		
 	}
 	
 	public String getDaysLeft(){
