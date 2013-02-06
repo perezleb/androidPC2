@@ -3,7 +3,10 @@ package com.droidengine.ironcoderideas;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 public class AbstractPCActivity extends FragmentActivity{
@@ -17,22 +20,25 @@ public class AbstractPCActivity extends FragmentActivity{
 	protected String consID;
 	protected String frID;
 	
+
+	
+	public void getConstituent(Intent intent){
+		token = intent.getStringExtra(TOKEN_KEY);
+        consID = intent.getStringExtra(CONS_ID_KEY);
+        frID = intent.getStringExtra(FR_ID_KEY);
+	}
+	
 	@SuppressLint("NewApi")
 	public void buildActionBar(){
 		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= 11){
         	ActionBar actionBar = getActionBar();
     		if(actionBar != null){
-    			actionBar.setDisplayShowHomeEnabled(false);
+    			Log.d(TAG, "Building bar" );
+    			actionBar.setBackgroundDrawable(new ColorDrawable());
     		}
         	
         }
-	}
-	
-	public void getConstituent(Intent intent){
-		token = intent.getStringExtra(TOKEN_KEY);
-        consID = intent.getStringExtra(CONS_ID_KEY);
-        frID = intent.getStringExtra(FR_ID_KEY);
 	}
 	
 	@Override

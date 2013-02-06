@@ -8,22 +8,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
      
-        <TextView 
-        	android:id="@+id/email_label"
-        	android:layout_width="fill_parent"
-        	android:layout_height="40dp"
-        	android:gravity="center"
-        	android:background="#75A3FF"
-        	android:textColor="#FFFFFF"
-        	android:textSize="20sp"
-        	android:textStyle="bold"
-        	android:text="Email"/>
         
         <Button
         	android:id="@+id/send_to_button"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:layout_below="@+id/email_label"
         	android:layout_marginTop="10dp"
         	android:layout_marginLeft="22dp"
         	android:text="To:"

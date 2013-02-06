@@ -69,7 +69,7 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 		setContentView(R.layout.make_gift);
 		
 		buildActionBar();
-
+		
 		cardBillingInfo = (RelativeLayout) findViewById(R.id.cardBillingInfo);
 		cardBillingInfo.setVisibility(View.GONE);		
 
@@ -115,6 +115,7 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.nav_menu, menu);
+	    menu.removeItem(R.id.make_gift);
 		return true;
 	}
 	

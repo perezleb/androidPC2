@@ -4,7 +4,9 @@
 *.jar
 *.war
 *.ear
-project.properties
+/project.properties
 
 /bin/
 /gen/
+/lint.xml
+

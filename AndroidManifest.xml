@@ -44,16 +44,22 @@
         </activity>
         <activity
             android:name="com.droidengine.ironcoderideas.Progress"
-            android:label="My Progress" >
+            android:icon="@drawable/money"
+            android:label="My Progress"
+            android:noHistory="true" >
         </activity>
         <activity
             android:name="com.droidengine.ironcoderideas.Email"
+            android:icon="@drawable/email"
             android:label="Email"
-			android:windowSoftInputMode="stateHidden" >
+            android:noHistory="true"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.droidengine.ironcoderideas.MakeGift"
+            android:icon="@drawable/gift"
             android:label="Make a Gift"
+            android:noHistory="true"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
@@ -64,11 +70,10 @@
             android:name="com.droidengine.ironcoderideas.RegistrationActivity"
             android:label="Register" >
         </activity>
-        
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBvijAcDptneQJyfd6rOCeSrrilwoyCq5U" />
-
     </application>
 
 </manifest>

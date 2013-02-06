@@ -52,7 +52,7 @@ public class Progress extends AbstractPCActivity {
         }
         
         setContentView(R.layout.progress);
-        
+                
         buildActionBar();
         
         amountRaised = (TextView)findViewById(R.id.amount_raised);
@@ -79,6 +79,7 @@ public class Progress extends AbstractPCActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.nav_menu, menu); 
+	    menu.removeItem(R.id.progress);
 	    return true;
 	}
 	

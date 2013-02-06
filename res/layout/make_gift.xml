@@ -9,17 +9,6 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/make_gift_label"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:background="#75A3FF"
-            android:gravity="center"
-            android:text="Make a Gift"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView1"
@@ -27,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/editText1"
             android:layout_alignRight="@+id/editText1"
-            android:layout_below="@+id/make_gift_label"
             android:text="@string/make_gift_instructions"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="12sp" />

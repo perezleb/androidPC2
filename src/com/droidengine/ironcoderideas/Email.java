@@ -50,7 +50,7 @@ public class Email extends AbstractPCActivity implements OnClickListener, Contac
         setContentView(R.layout.email);
         
         buildActionBar();
-        
+                
         sendToEditText = (EditText)findViewById(R.id.send_to_emails);
         subjectEditText = (EditText)findViewById(R.id.email_subject);
         messageBodyEditText = (EditText)findViewById(R.id.email_content);
@@ -134,7 +134,6 @@ public class Email extends AbstractPCActivity implements OnClickListener, Contac
 		contactDialog.show(getSupportFragmentManager(), "Contacts");
 	}
 	
-	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.nav_menu, menu);
