@@ -210,9 +210,14 @@
             android:id="@+id/submitGift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/cardBillingInfo"
-            android:layout_centerHorizontal="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginLeft="22dip"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/green_button_selector"
+            android:textColor="#FFFFFF"
             android:text="Make Gift" />
     </RelativeLayout>
 

@@ -52,7 +52,7 @@ public class RegisteredTeamraiserListAdapter extends BaseAdapter {
 				
 				v = l_Inflater.inflate(R.layout.find_teamraiser_item, null);
 				
-				TextView label = (TextView)v.findViewById(R.id.find_teamraiser_item);
+				TextView label = (TextView)v.findViewById(R.id.find_teamraisers_label);
 				
 				if (label != null){
 					label.setText(findEventItem.getLabelText());
