@@ -8,6 +8,7 @@ import java.util.Date;
 public class TeamraiserItem implements Item {
 	
 	private String teamraiserName;
+	private String teamName;
 	private String teamraiserLocation;
 	private String fr_id;
 	private String streetAddress;
@@ -22,6 +23,10 @@ public class TeamraiserItem implements Item {
 		teamraiserName = name;
 	}
 	
+	public void setTeamName(String name) {
+		teamName = name;
+	}
+	
 	public void setTeamraiserLocation(String location){
 		teamraiserLocation = location;
 	}
@@ -32,6 +37,10 @@ public class TeamraiserItem implements Item {
 	
 	public String getTeamraiserName(){
 		return teamraiserName;
+	}
+	
+	public String getTeamName() {
+		return teamName;
 	}
 	
 	public String getTeamraiserLocation(){

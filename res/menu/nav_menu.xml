@@ -11,6 +11,8 @@
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/my_teamraisers"
           android:title="Teamraisers" />
+    <item android:id="@+id/map"
+          android:title="Locate Teammates" />
     <item android:id="@+id/logout"
           android:title="Log out" />    
 </menu>

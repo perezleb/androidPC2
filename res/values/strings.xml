@@ -18,7 +18,6 @@
     <string name="make_gift_street">Street 1</string>
     <string name="make_gift_city">City</string>
     <string name="make_gift_state">State</string>
-    <string name="make_gift_xip">Zip</string>
     <string name="make_gift_zip">Zip</string>
 	<string name="error_config">Please set the %1$s constant and recompile the app.</string>
     <string name="already_registered">Device is already registered on server.</string>
@@ -37,4 +36,6 @@
     <string name="options_unregister">Unregister</string>
     <string name="options_clear">Clear</string>
     <string name="options_exit">Exit</string>
+    <string name="title_activity_map">MapActivity</string>
+
 </resources>

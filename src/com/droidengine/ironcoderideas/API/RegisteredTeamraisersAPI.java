@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.droidengine.ironcoderideas.ListItems.TRGPSConstants;
 import com.droidengine.ironcoderideas.ListItems.TeamraiserItem;
 
 import android.util.Log;
@@ -44,6 +46,7 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 		
 		NodeList teamraisers = doc.getElementsByTagName("teamraiser");
 		String name;
+		String teamName;
 		String location;
 		String id;
 		Element element;		
@@ -54,9 +57,11 @@ public class RegisteredTeamraisersAPI extends APIResponseManager {
 			name = getElementValue(element.getElementsByTagName("name"));
 			location = getElementValue(element.getElementsByTagName("location_name"));			
 			id = getElementValue(element.getElementsByTagName("id"));
+			teamName = getElementValue(element.getElementsByTagName("teamName"));
 			
 			teamraiser = new TeamraiserItem();
 			teamraiser.setTeamraiserName(name);
+			teamraiser.setTeamName(teamName);
 			teamraiser.setTeamraiserLocation(location);
 			teamraiser.setTeamraiserID(id);
 			list.add(teamraiser);
