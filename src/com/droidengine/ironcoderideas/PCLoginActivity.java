@@ -9,13 +9,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 
 import com.google.android.gcm.GCMRegistrar;
 import com.droidengine.ironcoderideas.R;
@@ -29,18 +32,16 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 	private static final String TAG = "IRONCODER";
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String TOKEN_KEY = "TOKEN";
-		
+	
 	/**
      * Intent's extra that contains the message to be displayed.
      */
     static final String EXTRA_MESSAGE = "message";
-    
+	
+	private static final String LOGIN_ERROR_KEY = "ERROR";
+	
 	private PCLoginAPI pcLogin;
 	
-	public EditText usernameEditText;
-	public EditText passwordEditText;
-	public Button loginButton;
-
 	private final BroadcastReceiver handleMessageReceiver =
             new BroadcastReceiver() {
         @Override
@@ -49,13 +50,18 @@ public class PCLoginActivity extends Activity implements OnClickListener{
             Log.d(TAG, newMessage + "\n");
         }
     };
-	
+	    
     AsyncTask<Void, Void, Void> registerTask;
 	
-    @Override
+    public EditText usernameEditText;
+	public EditText passwordEditText;
+	public Button loginButton;
+
+    @SuppressLint("NewApi")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+       
         GCMRegistrar.checkDevice(this);
 		GCMRegistrar.checkManifest(this);
         
@@ -63,12 +69,33 @@ public class PCLoginActivity extends Activity implements OnClickListener{
         
         registerGCM();
         
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= 11){
+        	ActionBar actionBar = getActionBar();
+    		if(actionBar != null){
+    			actionBar.setDisplayShowHomeEnabled(false);
+    		}
+        	
+        }
+        
+        String loginError = getIntent().getStringExtra(LOGIN_ERROR_KEY);        
+        
         usernameEditText = (EditText)findViewById(R.id.username);
         passwordEditText = (EditText)findViewById(R.id.password);
         
         loginButton = (Button)findViewById(R.id.login_button);
         loginButton.setOnClickListener(this);
-  
+        
+        if (loginError != null){
+        	displayErrorDialog("Could not log you in");
+        }
+    }
+    
+    @Override
+    protected void onRestart(){
+    	super.onRestart();
+    	Intent intent = new Intent(this, PCLoginActivity.class);
+    	startActivity(intent);
     }
 
 	@Override
@@ -87,24 +114,21 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		
 		username = "kmartinez";
 		password = "kmartinez";
-		
+								
 		if (username.equals("") || password.equals("")){
 			Log.d(TAG, "Missing Username or Password");
+			displayErrorDialog("Missing username or password");
 			return;
 		}
 		
 		pcLogin = new PCLoginAPI(username, password);
 		
-//		ProgressDialog loadingDialog = ProgressDialog.show(PCLoginActivity.this, "", "Loading...", true); 
-		
 		try {
 			pcLogin.login();
 		} catch (Exception e) {	
-			displayErrorDialog(e.toString());
-		}
-//		} finally {
-//			loadingDialog.dismiss();
-//		}
+			displayErrorDialog(e.toString().substring(e.toString().indexOf(":") + 2, e.toString().length()));
+			return;
+		}	
 				
 		Intent intent = new Intent(this, RegisteredTeamraisers.class);
     	intent.putExtra(CONS_ID_KEY, pcLogin.consID);
@@ -115,6 +139,17 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 	
 	private void displayErrorDialog(String errorMessage){
 		Log.d(TAG, "TODO: Show Error Dialog");
+		
+		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);		
+		alt_bld.setMessage(errorMessage).setCancelable(false)
+		.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {				
+				onRestart();
+			}
+		});
+
+		AlertDialog alert = alt_bld.create();
+		alert.show();
 	}
 	
 	// Register for Google Cloud Messaging
@@ -183,5 +218,4 @@ public class PCLoginActivity extends Activity implements OnClickListener{
         GCMRegistrar.onDestroy(this);
         super.onDestroy();
     }
-	
 }
