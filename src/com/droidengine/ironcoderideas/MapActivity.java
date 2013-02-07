@@ -11,6 +11,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,14 +62,14 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
  
         // Creating a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-    	criteria.setAltitudeRequired(false);
-    	criteria.setBearingRequired(true);
+//        Criteria criteria = new Criteria();
+//        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+//    	criteria.setAltitudeRequired(false);
+//    	criteria.setBearingRequired(true);
 //    	criteria.setCostAllowed(true);
 //    	criteria.setPowerRequirement(Criteria.POWER_LOW);
         // Getting the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
+        String provider = LocationManager.GPS_PROVIDER;
  
         // Getting Current Location
         Location location = locationManager.getLastKnownLocation(provider);
@@ -78,7 +79,6 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         }
  
         locationManager.requestLocationUpdates(provider, 5000, 0, this);
-        callAsyncPostTask(location);
         callAsyncGetTask();
     }
  
@@ -100,7 +100,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
  
         // Setting latitude and longitude in the TextView tv_location
         teamLocation.setText("Latitude:" +  latitude  + ", Longitude:"+ longitude );
- 
+        callAsyncPostTask(location);
     }
  
     @Override
@@ -116,6 +116,13 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO Auto-generated method stub
+    	if(status == LocationProvider.AVAILABLE) {
+    		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    		Location location = locationManager.getLastKnownLocation(provider);
+    		if(location!=null) {
+                onLocationChanged(location);
+            }
+    	}
     }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,21 +149,21 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 	}
 	
 	public void callAsyncPostTask(final Location loc) {
-		final Handler handler = new Handler();
-		Timer timer = new Timer();
-		TimerTask doAsyncTask = new TimerTask() {
-			@Override
-			public void run() {
-				handler.post(new Runnable() {
-					public void run() {
+//		final Handler handler = new Handler();
+//		Timer timer = new Timer();
+//		TimerTask doAsyncTask = new TimerTask() {
+//			@Override
+//			public void run() {
+//				handler.post(new Runnable() {
+//					public void run() {
 						BgPostLocationTask bgTask = new BgPostLocationTask(_frId, _cons_id, _teamName, loc);
 						bgTask.execute();
-					}
-				});
-				
-			}
-		};
-		timer.schedule(doAsyncTask, 0, 5000);
+//					}
+//				});
+//				
+//			}
+//		};
+//		timer.schedule(doAsyncTask, 0, 5000);
 	}
 	
 	public void callAsyncGetTask() {
@@ -192,7 +199,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 				
 			}
 		};
-		timer.schedule(doAsyncTask, 0, 30000);
+		timer.schedule(doAsyncTask, 0, 5000);
 	}
 
 }
