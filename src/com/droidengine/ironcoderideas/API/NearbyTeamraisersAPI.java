@@ -21,7 +21,7 @@ public class NearbyTeamraisersAPI extends APIResponseManager {
 	private static String METHOD = "getTeamraisersByDistance";
 	private static String API = "CRTeamraiserAPI?";
 	
-	private static String DISTANCE = "10";
+	private static String DISTANCE = "25";
 	private static String DISTANCE_UNITS = "mi";
 	private static String LIST_ASCENDING = "true";
 	private static String SORT_COLUMN = "distance";
