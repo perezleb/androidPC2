@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.droidengine.ironcoderideas.API.MakeGiftAPI;
+import com.droidengine.ironcoderideas.API.NotificationTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -100,11 +101,7 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 
 		submitGiftButton = (Button) findViewById(R.id.submitGift);
 		submitGiftButton.setOnClickListener(this);
-		
-		
-		
-	
-		
+			
 		giftAmount.addTextChangedListener(new TextWatcher(){
 			private String current = "";
 
@@ -159,9 +156,6 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.submitGift) {
-			
-
-
 			AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
 			alt_bld.setMessage("Process gift for " + giftAmount.getText().toString() + " ?")
 					.setCancelable(true)
@@ -195,13 +189,18 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 		AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
 		String message = "Gift recorded successfully!";
 
+		boolean success = true;
 		try {
 			makeGiftmanager.processGift(parameters);
 		} catch (Exception e) {
 			message = "Unable to process gift";
+			success = false;
 			Log.d(TAG, e.toString());
 		}
 
+		if(success){
+			sendNotification();
+		}
 		alt_bld.setMessage(message).setCancelable(false)
 				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
@@ -214,11 +213,15 @@ public class MakeGift extends AbstractPCActivity implements OnClickListener {
 		alert.show();
 	}
 	
-	@Override
-	public void finish(){
-		super.finish();
+	
+	private void sendNotification(){
+		NotificationTask task = new NotificationTask();
+		task.execute(giftFirstName.getText().toString().trim() + " " + giftLastName.getText().toString().trim(), 
+				giftAmount.getText().toString() );
 	}
-
+	
+	
+	
 	private Map<String, String> buildParamMap()  {
 		Map<String, String> params = new HashMap<String, String>();
 

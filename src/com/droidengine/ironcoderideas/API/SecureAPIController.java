@@ -58,9 +58,6 @@ public class SecureAPIController extends APIController {
 		return xmlResponse;
 	}
 	
-
-	
-	
 	protected String generateUrl(){
 		String request = getURL() + api + "method=" + method + "&api_key=" + KEY + "&v=" + VERSION;
 		return request;
