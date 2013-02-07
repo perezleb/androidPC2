@@ -84,7 +84,6 @@
 	 	android:layout_width="fill_parent"
 	 	android:layout_height="match_parent"
 	 	android:layout_below="@id/activity_list_header"
-	 	android:layout_alignParentBottom="true"	 
 	 	android:id="@+id/donor_list"
 	 	android:background="#FFFFFF"
 	 	android:listSelector="@drawable/donor_list_selector"/>  
