@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">IronCoderIdeas</string>
+    <string name="app_name">C3P-O</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="make_gift_instructions">Enter the details for a gift that someone gave you or promised to give you.</string>

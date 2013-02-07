@@ -24,7 +24,7 @@ public class NotificationTask extends AsyncTask<String, Void, Void> {
 		
 		
 		try {
-			doPost( name + " just donated " + amount + " !!");
+			doPost( name + " just donated " + amount + " !");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Log.d(TAG, e.getMessage());
