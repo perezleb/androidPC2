@@ -62,12 +62,12 @@ public class PCLoginActivity extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
-        //GCMRegistrar.checkDevice(this);
-		//GCMRegistrar.checkManifest(this);
+        GCMRegistrar.checkDevice(this);
+		GCMRegistrar.checkManifest(this);
         
         setContentView(R.layout.pc_login);
         
-        //registerGCM();
+        registerGCM();
         
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= 11){
