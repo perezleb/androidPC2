@@ -1,5 +1,7 @@
 package com.droidengine.ironcoderideas;
 
+import com.droidengine.ironcoderideas.ListItems.TRGPSConstants;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -62,6 +64,9 @@ public class AbstractPCActivity extends FragmentActivity{
 		} else if (item.getItemId() == R.id.my_teamraisers){
 			startRegisteredTeamraisersActivity();
 			return true;
+		} else if (item.getItemId() == R.id.map){
+			startMapActivity();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
@@ -101,6 +106,16 @@ public class AbstractPCActivity extends FragmentActivity{
     	intent.putExtra(TOKEN_KEY, token);
     	intent.putExtra(FR_ID_KEY, frID);
     	startActivity(intent);
+	}
+	
+	public void startMapActivity() {
+		Intent intent = getIntent();
+		String teamName = intent.getStringExtra(TRGPSConstants.TEAM_NAME);
+		Intent mapIntent = new Intent(this, MapActivity.class);
+		mapIntent.putExtra(TRGPSConstants.CONS_ID, consID);
+		mapIntent.putExtra(TRGPSConstants.ID, frID);
+		mapIntent.putExtra(TRGPSConstants.TEAM_NAME, teamName);
+    	startActivity(mapIntent);
 	}
 
 }

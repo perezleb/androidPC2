@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.droidengine.ironcoderideas.API.RegisteredTeamraisersAPI;
 import com.droidengine.ironcoderideas.ListAdapters.RegisteredTeamraiserListAdapter;
 import com.droidengine.ironcoderideas.ListItems.FindTeamraisersItem;
+import com.droidengine.ironcoderideas.ListItems.TRGPSConstants;
 import com.droidengine.ironcoderideas.ListItems.TeamraiserItem;
 
 import android.annotation.SuppressLint;
@@ -26,7 +27,7 @@ public class RegisteredTeamraisers extends Activity{
 	private static final String CONS_ID_KEY = "CONS_ID";
 	private static final String FR_ID_KEY = "FR_ID";
 	private static final String LOGIN_ERROR_KEY = "ERROR";
-	
+	private static final String TEAM_NAME = "teamName";
 	private String token;
 	private String consID;
 	
@@ -88,11 +89,13 @@ public class RegisteredTeamraisers extends Activity{
 	private void openProgressPage(int position){
 		TeamraiserItem teamraiser = (TeamraiserItem) teamraiserList.get(position);
 		String fr_id = teamraiser.getTeamraiserID();
+		String teamName = teamraiser.getTeamName();
 		
 		Intent intent = new Intent(this, Progress.class);
     	intent.putExtra(CONS_ID_KEY, consID);
     	intent.putExtra(TOKEN_KEY, token);
     	intent.putExtra(FR_ID_KEY, fr_id);
+    	intent.putExtra(TRGPSConstants.TEAM_NAME, teamName);
     	//TODO:insert team information
     	startActivity(intent);
 

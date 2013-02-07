@@ -95,6 +95,16 @@
 		</receiver>
 		
         <service android:name=".GCMIntentService" />
+
+        <activity
+            android:name="com.droidengine.ironcoderideas.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName="com.droidengine.ironcoderideas.Progress" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.droidengine.ironcoderideas.Progress" />
+        </activity>
+
     </application>
 
 </manifest>
