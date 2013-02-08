@@ -26,9 +26,11 @@ public class BgPostLocationTask extends AsyncTask<Void, Void, Void> {
 	private String _consId;
 	private String _frId;
 	private String _teamName;
+	private String _userName;
 	
-	public BgPostLocationTask(String id, String cons_id, String name, Location location) {
+	public BgPostLocationTask(String id, String userName, String cons_id, String name, Location location) {
 		_frId = id;
+		_userName = userName;
 		_consId = cons_id;
 		_teamName = name;
 		_loc = location;
@@ -39,8 +41,9 @@ public class BgPostLocationTask extends AsyncTask<Void, Void, Void> {
 		HttpClient httpclient = new DefaultHttpClient();
 		try {                
 			HttpPost httppost = new HttpPost(TRGPSConstants.SERVER_URL + POST_API);
-        	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+        	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
             nameValuePairs.add(new BasicNameValuePair("frId", _frId));
+            nameValuePairs.add(new BasicNameValuePair("userName", _userName));
             nameValuePairs.add(new BasicNameValuePair("consId", _consId));
             nameValuePairs.add(new BasicNameValuePair("teamName", _teamName));
             nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(_loc.getLatitude())));

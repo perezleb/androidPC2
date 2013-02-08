@@ -30,6 +30,7 @@ public class RegisteredTeamraisers extends Activity{
 	private static final String TEAM_NAME = "teamName";
 	private String token;
 	private String consID;
+	private String userName;
 	
 	private RegisteredTeamraisersAPI regEvents;
 	
@@ -43,6 +44,7 @@ public class RegisteredTeamraisers extends Activity{
         
         token = getIntent().getStringExtra(TOKEN_KEY);
         consID = getIntent().getStringExtra(CONS_ID_KEY);
+        userName = getIntent().getStringExtra(TRGPSConstants.USER_NAME);
         
         if (token != null && consID != null){
         	teamraiserList = getTeamraiserList();
@@ -96,7 +98,7 @@ public class RegisteredTeamraisers extends Activity{
     	intent.putExtra(TOKEN_KEY, token);
     	intent.putExtra(FR_ID_KEY, fr_id);
     	intent.putExtra(TRGPSConstants.TEAM_NAME, teamName);
-    	//TODO:insert team information
+    	intent.putExtra(TRGPSConstants.USER_NAME, userName);
     	startActivity(intent);
 
 	}

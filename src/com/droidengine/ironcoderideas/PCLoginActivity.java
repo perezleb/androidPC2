@@ -1,6 +1,7 @@
 package com.droidengine.ironcoderideas;
 
 import com.droidengine.ironcoderideas.API.PCLoginAPI;
+import com.droidengine.ironcoderideas.ListItems.TRGPSConstants;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,12 +63,12 @@ public class PCLoginActivity extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
-        GCMRegistrar.checkDevice(this);
-		GCMRegistrar.checkManifest(this);
+//        GCMRegistrar.checkDevice(this);
+//		GCMRegistrar.checkManifest(this);
         
         setContentView(R.layout.pc_login);
         
-        registerGCM();
+//        registerGCM();
         
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= 11){
@@ -112,8 +113,8 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		String username = usernameEditText.getText().toString();
 		String password = passwordEditText.getText().toString();
 		
-		username = "kmartinez";
-		password = "kmartinez";
+//		username = "kmartinez";
+//		password = "kmartinez";
 								
 		if (username.equals("") || password.equals("")){
 			Log.d(TAG, "Missing Username or Password");
@@ -133,6 +134,7 @@ public class PCLoginActivity extends Activity implements OnClickListener{
 		Intent intent = new Intent(this, RegisteredTeamraisers.class);
     	intent.putExtra(CONS_ID_KEY, pcLogin.consID);
     	intent.putExtra(TOKEN_KEY, pcLogin.token);
+    	intent.putExtra(TRGPSConstants.USER_NAME, username);
     	startActivity(intent);
 	}
     

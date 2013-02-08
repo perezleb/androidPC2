@@ -20,6 +20,7 @@ public class AbstractPCActivity extends FragmentActivity{
 	protected String token;
 	protected String consID;
 	protected String frID;
+	protected String userName;
 	
 
 	
@@ -27,6 +28,7 @@ public class AbstractPCActivity extends FragmentActivity{
 		token = intent.getStringExtra(TOKEN_KEY);
         consID = intent.getStringExtra(CONS_ID_KEY);
         frID = intent.getStringExtra(FR_ID_KEY);
+        userName = intent.getStringExtra(TRGPSConstants.USER_NAME);
 	}
 	
 	@SuppressLint("NewApi")
@@ -115,6 +117,7 @@ public class AbstractPCActivity extends FragmentActivity{
 		mapIntent.putExtra(TRGPSConstants.CONS_ID, consID);
 		mapIntent.putExtra(TRGPSConstants.ID, frID);
 		mapIntent.putExtra(TRGPSConstants.TEAM_NAME, teamName);
+		mapIntent.putExtra(TRGPSConstants.USER_NAME, userName);
     	startActivity(mapIntent);
 	}
 

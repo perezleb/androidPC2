@@ -37,6 +37,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     private String _frId;
     private String _teamName;
     private String _cons_id;
+    private String _userName;
 
  
     @Override
@@ -48,6 +49,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         _frId = intent.getStringExtra(TRGPSConstants.ID);
         _teamName = intent.getStringExtra(TRGPSConstants.TEAM_NAME);
         _cons_id = intent.getStringExtra(TRGPSConstants.CONS_ID);
+        _userName = intent.getStringExtra(TRGPSConstants.USER_NAME);
         
         // Getting reference to the SupportMapFragment of activity_map.xml
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -156,7 +158,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 //			public void run() {
 //				handler.post(new Runnable() {
 //					public void run() {
-						BgPostLocationTask bgTask = new BgPostLocationTask(_frId, _cons_id, _teamName, loc);
+						BgPostLocationTask bgTask = new BgPostLocationTask(_frId, _userName, _cons_id, _teamName, loc);
 						bgTask.execute();
 //					}
 //				});
@@ -174,7 +176,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 			public void run() {
 				handler.post(new Runnable() {
 					public void run() {
-						BgGetLocationTask bgTask = new BgGetLocationTask(_frId, _cons_id, _teamName);
+						BgGetLocationTask bgTask = new BgGetLocationTask(_frId, _userName, _cons_id, _teamName);
 						final AsyncTask<Void, Void, List<TeammateModel>> taskResult = bgTask.execute();
 						List<TeammateModel> tmList;
 						try {
@@ -184,6 +186,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 								LatLng latLng = new LatLng(teammate.getLatitude(), teammate.getLongitude());
 								MarkerOptions marker = new MarkerOptions();
 								marker.position(latLng);
+								marker.title(teammate.getUserName());
 								_googleMap.addMarker(marker);
 							}
 						} catch (InterruptedException e) {

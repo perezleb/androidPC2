@@ -11,4 +11,5 @@ public class TRGPSConstants {
 	public static String ID = "id";
 	public static String TEAMRAISER = "teamraiser";
 	public static final String TEAM_NAME = "teamName";
+	public static final String USER_NAME = "userName";
 }

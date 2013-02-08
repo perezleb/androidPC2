@@ -32,11 +32,13 @@ public class BgGetLocationTask extends AsyncTask<Void, Void, List<TeammateModel>
 	private String _consId;
 	private String _frId;
 	private String _teamName;
+	private String _userName;
 	
-	public BgGetLocationTask(String id, String cons_id, String name) {
+	public BgGetLocationTask(String id, String userName, String cons_id, String name) {
 		_frId = id;
 		_consId = cons_id;
 		_teamName = name;
+		_userName = userName;
 	}
 	
 	@Override
@@ -44,8 +46,9 @@ public class BgGetLocationTask extends AsyncTask<Void, Void, List<TeammateModel>
 		HttpClient httpclient = new DefaultHttpClient();
 		List<TeammateModel> teammates = new ArrayList<TeammateModel>();
 		try {                          
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
             nameValuePairs.add(new BasicNameValuePair("frId", _frId));
+            nameValuePairs.add(new BasicNameValuePair("userName", _userName));
             nameValuePairs.add(new BasicNameValuePair("consId", _consId));
             nameValuePairs.add(new BasicNameValuePair("teamName", _teamName));
             String url = TRGPSConstants.SERVER_URL + GET_API + "?" + URLEncodedUtils.format(nameValuePairs, "utf-8");
@@ -99,7 +102,7 @@ public class BgGetLocationTask extends AsyncTask<Void, Void, List<TeammateModel>
         	Location location = new Location(LocationManager.GPS_PROVIDER);
         	location.setLatitude(Double.valueOf(jsonAry.getJSONObject(i).optString("latitude")));
         	location.setLongitude(Double.valueOf(jsonAry.getJSONObject(i).optString("longitude")));
-        	TeammateModel teammate = new TeammateModel(jsonAry.getJSONObject(i).optString("cons_id"), location);
+        	TeammateModel teammate = new TeammateModel(jsonAry.getJSONObject(i).optString("user_name"),jsonAry.getJSONObject(i).optString("cons_id"), location);
         	teammates.add(teammate);
         }
 		return teammates;

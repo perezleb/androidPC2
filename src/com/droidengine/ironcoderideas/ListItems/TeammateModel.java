@@ -6,10 +6,16 @@ public class TeammateModel {
 
 	private String _consId;
 	private Location _location;
+	private String _userName;
 	
-	public TeammateModel(String consId, Location location) {
+	public TeammateModel(String userName, String consId, Location location) {
+		_userName = userName;
 		_consId = consId;
 		_location = location;
+	}
+	
+	public String getUserName() {
+		return _userName;
 	}
 	
 	public String getConsId() {
